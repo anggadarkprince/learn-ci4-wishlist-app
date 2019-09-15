@@ -124,3 +124,7 @@ nb-configuration.xml
 
 /results/
 /phpunit*.xml
+
+public/assets/
+node_modules/
+package-lock.json
