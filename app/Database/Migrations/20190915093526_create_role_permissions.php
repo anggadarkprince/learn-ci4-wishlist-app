@@ -13,7 +13,7 @@ class Migration_create_role_permissions_table extends Migration
 		$this->forge->addField("`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
 		
 		$this->forge->addForeignKey('role_id', 'roles', 'id', 'CASCADE', 'CASCADE');
-		$this->forge->addForeignKey('permission_id', 'roles', 'id', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('permission_id', 'permissions', 'id', 'CASCADE', 'CASCADE');
 
 		$this->forge->createTable('role_permissions', true);
 	}

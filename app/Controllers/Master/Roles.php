@@ -5,6 +5,7 @@ namespace App\Controllers\Master;
 use App\Controllers\BaseController;
 use App\Models\PermissionModel;
 use App\Models\RoleModel;
+use App\Models\RolePermissionModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 class Roles extends BaseController
@@ -17,18 +18,25 @@ class Roles extends BaseController
     }
 
     /**
-     * Show role data.
+     * Show index role data.
+     * 
+     * @return string
      */
     public function index()
     {
-        $data = [
-            'roles' => $this->role->paginate(),
-            'pager' => $this->role->pager,
-            'title' => 'Role'
-        ];
-        return view('roles/index', $data);
+        $title = 'Role';
+        $roles = $this->role->paginate();
+        $pager = $this->role->pager;
+
+        return view('roles/index', compact('title', 'roles', 'pager'));
     }
 
+    /**
+     * Show single role data.
+     * 
+     * @param $id
+     * @return string
+     */
     public function show($id)
     {
         $title = 'View role';
@@ -39,6 +47,8 @@ class Roles extends BaseController
 
     /**
      * Show create role data form.
+     * 
+     * @return string
      */
     public function new()
     {
@@ -46,7 +56,7 @@ class Roles extends BaseController
         $permission = new PermissionModel();
         $permissions = $permission->findAll();
 
-        return view('roles/new', compact('permissions', 'title'));
+        return view('roles/new', compact('permissions', 'title', 'validation'));
     }
 
     /**
@@ -57,15 +67,39 @@ class Roles extends BaseController
      */
     public function create()
     {
-        if ($this->role->insert($this->request->getPost())) {
-            return redirect()->to('master/roles')
-                ->with('status', 'warning')
-                ->with('message', "Role {$this->request->getPost('role')} successfully created");
+        $rules = [
+            'role' => 'required|max_length[50]|is_unique[roles.role,id,{id}]',
+            'description' => 'required|max_length[500]',
+            'permissions' => 'required'
+        ];
+
+        if ($this->validate($rules)) {
+
+            $this->db->transStart();
+
+            $this->role->insert($this->request->getPost());
+            $roleId = $this->db->insertID();
+
+            $rolePermission = new RolePermissionModel();
+            foreach ($this->request->getPost('permissions') as $permissionId) {
+                $rolePermission->insert([
+                    'role_id' => $roleId,
+                    'permission_id' => $permissionId
+                ]);
+            }
+
+            $this->db->transComplete();
+
+            if ($this->db->transStatus()) {
+                return redirect()->to('/master/roles')
+                    ->with('status', 'success')
+                    ->with('message', "Role {$this->request->getPost('role')} successfully created");
+            }
         }
 
-        return redirect()->to('master/roles')
+        return redirect()->back()->withInput()
             ->with('status', 'warning')
-            ->with('message', "Create role {$this->request->getPost('role')} failed");
+            ->with('message', "Create role {$this->request->getPost('role')} failed, try again or contact administrator");
     }
 
     /**

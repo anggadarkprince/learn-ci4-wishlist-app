@@ -17,5 +17,6 @@ class RoleModel extends Model
     protected $validationRules    = [
         'role' => 'required|max_length[50]|is_unique[roles.role,id,{id}]',
         'description' => 'required|max_length[500]',
+        'permissions' => 'required'
     ];
 }

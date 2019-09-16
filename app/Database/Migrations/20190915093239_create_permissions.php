@@ -8,6 +8,8 @@ class Migration_create_permissions_table extends Migration
 	{
 		$this->forge->addField([
 			'id' => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => TRUE],
+			'module' => ['type' => 'VARCHAR', 'constraint' => '50', 'null' => TRUE],
+			'submodule' => ['type' => 'VARCHAR', 'constraint' => '50', 'null' => TRUE],
 			'permission' => ['type' => 'VARCHAR', 'constraint' => 100, 'unique' => true],
 			'description' => ['type' => 'TEXT', 'null' => true]
 		]);
