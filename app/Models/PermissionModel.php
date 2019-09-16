@@ -7,4 +7,5 @@ use CodeIgniter\Model;
 class PermissionModel extends Model
 {
     protected $table = 'permissions';
+    protected $returnType = 'object';
 }

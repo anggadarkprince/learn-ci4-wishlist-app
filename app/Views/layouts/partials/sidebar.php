@@ -61,17 +61,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="<?= site_url('master/role') ?>">
-                        <i class="mdi mdi-shield-account text-teal"></i> Role
+                    <a class="nav-link " href="<?= site_url('master/roles') ?>">
+                        <i class="mdi mdi-shield-account text-teal"></i> Roles
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="<?= site_url('master/user') ?>">
-                        <i class="mdi mdi-account-multiple text-success"></i> User
+                    <a class="nav-link " href="<?= site_url('master/users') ?>">
+                        <i class="mdi mdi-account-multiple text-success"></i> Users
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="<?= site_url('wishlist') ?>">
+                    <a class="nav-link " href="<?= site_url('wishlists') ?>">
                         <i class="mdi mdi-gift text-blue"></i> Wish lists
                     </a>
                 </li>

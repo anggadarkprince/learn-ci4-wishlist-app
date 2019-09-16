@@ -72,15 +72,21 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Dashboard::index');
+$routes->get('/', 'Dashboard::index', ['as' => 'home']);
+//$routes->addRedirect('home', 'home');
+
+$routes->group('master', ['namespace' => 'App\Controllers\Master'], function($routes) {
+    $routes->resource('users');
+    $routes->resource('roles');
+});
 
 //$routes->add('migrate', 'App\Controllers\Console\Migrate::index');
 //$routes->add('migrate/(.+)', 'App\Controllers\Console\Migrate::$1');
 $routes->group('migrate', ['namespace' => 'App\Controllers\Console'], function($routes) {
 	$routes->cli('/', 'Migrate');
-	$routes->cli('/rollback/(:num)', 'Migrate::rollback/$1');
-	$routes->cli('/init', 'Migrate::init');
-	$routes->cli('/destroy', 'Migrate::destroy');
+	$routes->cli('rollback/(:num)', 'Migrate::rollback/$1');
+	$routes->cli('init', 'Migrate::init');
+	$routes->cli('destroy', 'Migrate::destroy');
 });
 
 /**

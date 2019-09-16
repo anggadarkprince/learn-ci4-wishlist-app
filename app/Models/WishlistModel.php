@@ -6,9 +6,11 @@ use CodeIgniter\Model;
 
 class WishlistModel extends Model
 {
-    protected $table = 'wissthlist';
+    protected $table = 'wishlists';
+
+    protected $returnType = 'App\Entities\Wishlist';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['role', 'description'];
+    protected $allowedFields = ['user_id', 'wish', 'description', 'target', 'progress', 'is_private', 'is_completed', 'completed_at'];
     protected $useTimestamps = true;
 }
