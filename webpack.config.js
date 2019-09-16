@@ -9,7 +9,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, 'assets/src/javascripts/app.js'),
+        app: path.resolve(__dirname, 'assets/javascripts/app.js'),
     },
     output: {
         filename: '[name].bundle.[contenthash].js',
@@ -51,13 +51,13 @@ module.exports = {
         new CleanWebpackPlugin(),
         new ManifestPlugin({
             fileName: 'manifest.json',
-            publicPath: 'assets/dist/'
+            publicPath: 'assets/'
         }),
         new MiniCssExtractPlugin({
             filename: "[name].[contenthash].css",
         }),
         new CopyWebpackPlugin([
-            {from: './assets/src/images/', to: 'img/', toType: 'dir'}
+            {from: './assets/images/', to: 'img/', toType: 'dir'}
         ], {debug: 'info'}),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')

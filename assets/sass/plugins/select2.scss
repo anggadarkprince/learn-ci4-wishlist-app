@@ -1,0 +1,77 @@
+select.select2 {
+  width: 100% !important;
+}
+
+.select2-container--classic .select2-selection--single,
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--single .select2-selection__arrow,
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  height: 33.2px !important;
+  line-height: 32px !important;
+}
+
+.select2-container--default .select2-selection--multiple {
+  line-height: 21px !important;
+  min-height: 33.2px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  font-size: 0.8rem;
+}
+
+.select2-search--dropdown .select2-search__field {
+  font-size: 0.8rem;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+  font-size: 0.8rem;
+  padding: 0 10px;
+}
+
+.select2-container--default.select2-container--disabled .select2-selection--single {
+  background: #f3f6f9;
+}
+
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+  border-color: $border-color;
+  border-radius: 2px;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--single,
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  border-color: #80bdff;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__choice,
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field {
+  width: auto !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  right: 5px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+  color: #c9c8c8;
+  font-size: 0.8rem;
+}
+
+.form-control-sm + {
+  .select2-container--classic .select2-selection--single,
+  .select2-container--default .select2-selection--single,
+  .select2-container--default .select2-selection--single .select2-selection__arrow,
+  .select2-container--default .select2-selection--single .select2-selection__rendered {
+    height: 28px !important;
+    line-height: 25px !important;
+  }
+
+  .select2-container--default .select2-selection--single .select2-selection__rendered {
+    font-size: 0.76563rem;
+  }
+}

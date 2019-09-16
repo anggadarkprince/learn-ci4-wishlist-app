@@ -1,0 +1,21 @@
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.alert {
+  font-size: 14px;
+
+  &.alert-dismissible .close {
+    padding: 0.6rem 1rem;
+  }
+}
+
+.modal-header, .modal-footer {
+  border-color: #ebeff3;
+}
+
+.mdi {
+  font-size: 1.1rem;
+  line-height: 0.8rem;
+  vertical-align: middle;
+}

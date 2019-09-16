@@ -33,7 +33,6 @@ class RoleSeeder extends Seeder
                         ->get()
                         ->getRowArray()['id'];
 
-                        echo $roleId . ' ' . $permissionId;
                     $this->db->table('role_permissions')->insert([
                         'role_id' => $roleId,
                         'permission_id' => $permissionId
