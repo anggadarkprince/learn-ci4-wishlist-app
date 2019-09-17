@@ -3,6 +3,7 @@
 namespace App\Controllers\Master;
 
 use App\Controllers\BaseController;
+use App\Libraries\Exporter;
 use App\Models\PermissionModel;
 use App\Models\RoleModel;
 use App\Models\RolePermissionModel;
@@ -25,8 +26,17 @@ class Roles extends BaseController
     public function index()
     {
         $title = 'Role';
-        $roles = $this->role->paginate();
-        $pager = $this->role->pager;
+        $data = $this->role->filter($_GET);
+
+        if ($this->request->getGet('export')) {
+            $roles = $data->asArray()->findAll();
+            $exporter = new Exporter();
+            $filePath = $exporter->exportFromArray($title, $roles);
+            return $this->response->download($filePath, null, true);
+        } else {
+            $roles = $data->paginate();
+            $pager = $this->role->pager;
+        }
 
         return view('roles/index', compact('title', 'roles', 'pager'));
     }

@@ -70,5 +70,6 @@
             </div>
         </div>
     </div>
+    <?= $this->include('roles/_modal_filter') ?>
     <?= $this->include('layouts/modals/delete') ?>
 <?= $this->endSection() ?>

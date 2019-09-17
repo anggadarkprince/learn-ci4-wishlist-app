@@ -1,6 +1,8 @@
 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
     <div class="container-fluid">
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="<?= site_url('/') ?>"><?= isset($title) ? $title : 'Home' ?></a>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="<?= site_url('/') ?>">
+            <?= isset($title) ? $title : (new \ReflectionClass($this))->getShortName() ?>
+        </a>
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <div class="form-group mb-0">
                 <div class="input-group input-group-alternative">
