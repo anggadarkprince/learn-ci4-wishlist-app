@@ -15,8 +15,7 @@ class RoleModel extends Model
     protected $useTimestamps = true;
 
     protected $validationRules    = [
-        'role' => 'required|max_length[50]|is_unique[roles.role,id,{id}]',
-        'description' => 'required|max_length[500]',
-        'permissions' => 'required'
+        'role' => 'required|max_length[50]',
+        'description' => 'max_length[500]',
     ];
 }

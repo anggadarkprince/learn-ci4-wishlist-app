@@ -17,7 +17,14 @@
     <?= $this->include('layouts/partials/sidebar') ?>
     <div class="main-content">
         <?= $this->include('layouts/partials/header') ?>
-        <?= $this->renderSection('content') ?>
+
+        <div class="header bg-gradient-primary pb-8 pt-5 pt-md-6">
+            <?= $this->renderSection('content-header') ?>
+        </div>
+        <div class="container-fluid mt--7">
+            <?= $this->include('layouts/partials/alert') ?>
+            <?= $this->renderSection('content') ?>
+        </div>
     </div>
 
     <script src="<?= base_url(get_asset('runtime.js')) ?>"></script>

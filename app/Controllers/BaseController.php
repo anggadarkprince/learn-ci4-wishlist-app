@@ -15,7 +15,13 @@ namespace App\Controllers;
  */
 
 use CodeIgniter\Controller;
+use CodeIgniter\Database\BaseConnection;
 
+/**
+ * Class BaseController
+ * @package App\Controllers
+ * @property BaseConnection $db
+ */
 class BaseController extends Controller
 {
 
@@ -40,8 +46,7 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.:
-		$this->session = \Config\Services::session();
-		$this->validator = \Config\Services::validation();
+		// $this->session = \Config\Services::session();
 		$this->db = \Config\Database::connect();
 	}
 

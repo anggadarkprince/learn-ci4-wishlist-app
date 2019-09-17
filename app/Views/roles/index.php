@@ -1,9 +1,6 @@
 <?= $this->extend('layouts/app') ?>
 
 <?= $this->section('content') ?>
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-6"></div>
-<div class="container-fluid mt--7">
-    <?= $this->include('layouts/partials/alert') ?>
     <div class="card">
         <div class="card-body">
             <div class="d-sm-flex align-items-center justify-content-between">
@@ -22,48 +19,48 @@
             </div>
             <table class="table table-hover table-md mt-3 responsive">
                 <thead>
-                    <tr>
-                        <th class="text-md-center" style="width: 60px">No</th>
-                        <th>Role</th>
-                        <th>Description</th>
-                        <th>Created At</th>
-                        <th style="min-width: 120px" class="text-md-right">Action</th>
-                    </tr>
+                <tr>
+                    <th class="text-md-center" style="width: 60px">No</th>
+                    <th>Role</th>
+                    <th>Description</th>
+                    <th>Created At</th>
+                    <th style="min-width: 120px" class="text-md-right">Action</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <?php $no = isset($roles) ? ($pager->getDetails()['currentPage'] - 1) * $pager->getDetails()['perPage'] : 0 ?>
-                    <?php foreach ($roles as $role) : ?>
-                        <tr>
-                            <td class="text-md-center"><?= ++$no ?></td>
-                            <td><?= $role->role ?></td>
-                            <td><?= $role->description ?></td>
-                            <td><?= $role->created_at->format('d F Y H:i') ?></td>
-                            <td class="text-md-right">
-                                <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle btn-action mr-0" type="button" data-toggle="dropdown">
-                                        Action
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="<?= site_url('master/roles/' . $role->id) ?>">
-                                            <i class="mdi mdi-eye-outline mr-2"></i> View
-                                        </a>
-                                        <a class="dropdown-item" href="<?= site_url('master/roles/' . $role->id . '/edit') ?>">
-                                            <i class="mdi mdi-square-edit-outline mr-2"></i> Edit
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item btn-delete" href="#modal-delete" data-toggle="modal" data-id="<?= $role->id ?>" data-label="<?= $role->role ?>" data-title="Role" data-url="<?= site_url('master/roles/' . $role->id) ?>">
-                                            <i class="mdi mdi-trash-can-outline mr-2"></i> Delete
-                                        </a>
-                                    </div>
+                <?php $no = isset($roles) ? ($pager->getDetails()['currentPage'] - 1) * $pager->getDetails()['perPage'] : 0 ?>
+                <?php foreach ($roles as $role) : ?>
+                    <tr>
+                        <td class="text-md-center"><?= ++$no ?></td>
+                        <td><?= $role->role ?></td>
+                        <td><?= $role->description ?></td>
+                        <td><?= $role->created_at->format('d F Y H:i') ?></td>
+                        <td class="text-md-right">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle btn-action mr-0" type="button" data-toggle="dropdown">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="<?= site_url('master/roles/' . $role->id) ?>">
+                                        <i class="mdi mdi-eye-outline mr-2"></i> View
+                                    </a>
+                                    <a class="dropdown-item" href="<?= site_url('master/roles/' . $role->id . '/edit') ?>">
+                                        <i class="mdi mdi-square-edit-outline mr-2"></i> Edit
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item btn-delete" href="#modal-delete" data-toggle="modal" data-id="<?= $role->id ?>" data-label="<?= $role->role ?>" data-title="Role" data-url="<?= site_url('master/roles/' . $role->id) ?>">
+                                        <i class="mdi mdi-trash-can-outline mr-2"></i> Delete
+                                    </a>
                                 </div>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    <?php if (empty($roles)) : ?>
-                        <tr>
-                            <td colspan="5">No roles data available</td>
-                        </tr>
-                    <?php endif; ?>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                <?php if (empty($roles)) : ?>
+                    <tr>
+                        <td colspan="5">No roles data available</td>
+                    </tr>
+                <?php endif; ?>
                 </tbody>
             </table>
 
@@ -73,6 +70,5 @@
             </div>
         </div>
     </div>
-</div>
-<?= $this->include('layouts/modals/delete') ?>
+    <?= $this->include('layouts/modals/delete') ?>
 <?= $this->endSection() ?>

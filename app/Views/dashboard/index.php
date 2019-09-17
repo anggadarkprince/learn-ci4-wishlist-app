@@ -1,100 +1,101 @@
 <?= $this->extend('layouts/app') ?>
 
-<?= $this->section('content') ?>
-    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-7">
-        <div class="container-fluid">
-            <div class="header-body">
-                <!-- Card stats -->
-                <div class="row">
-                    <div class="col-xl-3 col-lg-6">
-                        <div class="card card-stats mb-4 mb-xl-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
-                                        <span class="h2 font-weight-bold mb-0">350,897</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                            <i class="mdi mdi-chart-bar"></i>
-                                        </div>
-                                    </div>
+<?= $this->section('content-header') ?>
+<div class="container-fluid mt-4">
+    <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+            <div class="col-xl-3 col-lg-6">
+                <div class="card card-stats mb-4 mb-xl-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
+                                <span class="h2 font-weight-bold mb-0">350,897</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                    <i class="mdi mdi-chart-bar"></i>
                                 </div>
-                                <p class="mt-3 mb-0 text-muted text-sm">
-                                    <span class="text-success mr-2"><i class="mdi mdi-arrow-up"></i> 3.48%</span>
-                                    <span class="text-nowrap">Since last month</span>
-                                </p>
                             </div>
                         </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-success mr-2"><i class="mdi mdi-arrow-up"></i> 3.48%</span>
+                            <span class="text-nowrap">Since last month</span>
+                        </p>
                     </div>
-                    <div class="col-xl-3 col-lg-6">
-                        <div class="card card-stats mb-4 mb-xl-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-                                        <span class="h2 font-weight-bold mb-0">2,356</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                                            <i class="mdi mdi-chart-pie"></i>
-                                        </div>
-                                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+                <div class="card card-stats mb-4 mb-xl-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
+                                <span class="h2 font-weight-bold mb-0">2,356</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                                    <i class="mdi mdi-chart-pie"></i>
                                 </div>
-                                <p class="mt-3 mb-0 text-muted text-sm">
-                                    <span class="text-danger mr-2"><i class="mdi mdi-arrow-down"></i> 3.48%</span>
-                                    <span class="text-nowrap">Since last week</span>
-                                </p>
                             </div>
                         </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-danger mr-2"><i class="mdi mdi-arrow-down"></i> 3.48%</span>
+                            <span class="text-nowrap">Since last week</span>
+                        </p>
                     </div>
-                    <div class="col-xl-3 col-lg-6">
-                        <div class="card card-stats mb-4 mb-xl-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Wishlists</h5>
-                                        <span class="h2 font-weight-bold mb-0">924</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                                            <i class="mdi mdi-gift"></i>
-                                        </div>
-                                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+                <div class="card card-stats mb-4 mb-xl-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title text-uppercase text-muted mb-0">Wishlists</h5>
+                                <span class="h2 font-weight-bold mb-0">924</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                                    <i class="mdi mdi-gift"></i>
                                 </div>
-                                <p class="mt-3 mb-0 text-muted text-sm">
-                                    <span class="text-warning mr-2"><i class="mdi mdi-arrow-down"></i> 1.10%</span>
-                                    <span class="text-nowrap">Since yesterday</span>
-                                </p>
                             </div>
                         </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-warning mr-2"><i class="mdi mdi-arrow-down"></i> 1.10%</span>
+                            <span class="text-nowrap">Since yesterday</span>
+                        </p>
                     </div>
-                    <div class="col-xl-3 col-lg-6">
-                        <div class="card card-stats mb-4 mb-xl-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
-                                        <span class="h2 font-weight-bold mb-0">49,65%</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                                            <i class="mdi mdi-chart-gantt"></i>
-                                        </div>
-                                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+                <div class="card card-stats mb-4 mb-xl-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
+                                <span class="h2 font-weight-bold mb-0">49,65%</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                                    <i class="mdi mdi-chart-gantt"></i>
                                 </div>
-                                <p class="mt-3 mb-0 text-muted text-sm">
-                                    <span class="text-success mr-2"><i class="mdi mdi-arrow-up"></i> 12%</span>
-                                    <span class="text-nowrap">Since last month</span>
-                                </p>
                             </div>
                         </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-success mr-2"><i class="mdi mdi-arrow-up"></i> 12%</span>
+                            <span class="text-nowrap">Since last month</span>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid mt--7" id="dashboard">
+</div>
+<?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
+    <div id="dashboard">
         <div class="row">
             <div class="col-xl-8 mb-5 mb-xl-0">
                 <div class="card bg-gradient-default shadow">

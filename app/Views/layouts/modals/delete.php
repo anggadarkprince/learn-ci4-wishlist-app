@@ -3,7 +3,7 @@
         <div class="modal-content">
             <form action="#" method="post">
                 <?= csrf_field() ?>
-                <input type="hidden" name="_method" value="DELETE" />
+                <input type="hidden" name="_method" value="DELETE">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalDelete">
                         Delete <span class="delete-title"></span>

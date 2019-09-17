@@ -19,7 +19,7 @@ class Roles extends BaseController
 
     /**
      * Show index role data.
-     * 
+     *
      * @return string
      */
     public function index()
@@ -33,7 +33,7 @@ class Roles extends BaseController
 
     /**
      * Show single role data.
-     * 
+     *
      * @param $id
      * @return string
      */
@@ -42,12 +42,15 @@ class Roles extends BaseController
         $title = 'View role';
         $role = $this->role->find($id);
 
-        return view('roles/view', compact('role', 'title'));
+        $permission = new PermissionModel();
+        $permissions = $permission->getByRole($id);
+
+        return view('roles/view', compact('role', 'permissions', 'title'));
     }
 
     /**
      * Show create role data form.
-     * 
+     *
      * @return string
      */
     public function new()
@@ -67,14 +70,7 @@ class Roles extends BaseController
      */
     public function create()
     {
-        $rules = [
-            'role' => 'required|max_length[50]|is_unique[roles.role,id,{id}]',
-            'description' => 'required|max_length[500]',
-            'permissions' => 'required'
-        ];
-
-        if ($this->validate($rules)) {
-
+        if ($this->validate('roles')) {
             $this->db->transStart();
 
             $this->role->insert($this->request->getPost());
@@ -113,10 +109,19 @@ class Roles extends BaseController
         $title = 'Edit role';
         $role = $this->role->find($id);
 
+        if ($role->role == ROLE_RESERVED_ADMIN) {
+            return redirect()->back()
+                ->with('status', 'warning')
+                ->with('message', "Reserved role {$role->role} cannot be edited");
+        }
+
         $permission = new PermissionModel();
         $permissions = $permission->findAll();
 
-        return view('roles/edit', compact('role', 'permissions', 'title'));
+        $rolePermission = new RolePermissionModel();
+        $rolePermissions = $rolePermission->where(['role_id' => $id])->findAll();
+
+        return view('roles/edit', compact('role', 'permissions', 'rolePermissions', 'title'));
     }
 
     /**
@@ -128,14 +133,37 @@ class Roles extends BaseController
      */
     public function update($id)
     {
-        if ($this->role->update($id, $this->request->getPost())) {
-            return redirect()->to('master/roles')
-                ->with('status', 'warning')
-                ->with('message', "Role {$this->request->getPost('role')} successfully updated");
+        $rules = [
+            'role' => 'required|max_length[50]|is_unique[roles.role,id,' . $id . ']',
+            'description' => 'max_length[500]',
+            'permissions' => 'required'
+        ];
+
+        if ($this->validate($rules)) {
+            $this->db->transStart();
+
+            $this->role->update($id, $this->request->getPost());
+
+            $rolePermission = new RolePermissionModel();
+            $rolePermission->where('role_id', $id)->delete();
+            foreach ($this->request->getPost('permissions') as $permissionId) {
+                $rolePermission->insert([
+                    'role_id' => $id,
+                    'permission_id' => $permissionId
+                ]);
+            }
+
+            $this->db->transComplete();
+
+            if ($this->db->transStatus()) {
+                return redirect()->to('/master/roles')
+                    ->with('status', 'success')
+                    ->with('message', "Role {$this->request->getPost('role')} successfully updated");
+            }
         }
 
-        return redirect()->to('master/roles')
-            ->with('status', 'warning')
+        return redirect()->back()->withInput()
+            ->with('status', 'danger')
             ->with('message', "Update role {$this->request->getPost('role')} failed");
     }
 

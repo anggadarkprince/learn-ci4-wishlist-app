@@ -1,10 +1,6 @@
 <?= $this->extend('layouts/app') ?>
 
 <?= $this->section('content') ?>
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-6"></div>
-<div class="container-fluid mt--7 mb-5">
-    <?= $this->include('layouts/partials/alert') ?>
-
     <form action="<?= site_url('master/roles') ?>" method="POST" id="form-role">
         <?= csrf_field() ?>
         <div class="card grid-margin">
@@ -12,12 +8,12 @@
                 <h4 class="card-title">Create New Role</h4>
                 <div class="form-group">
                     <label for="role">Role Name</label>
-                    <input type="text" class="form-control" id="role" name="role" maxlength="50" value="<?= old('role') ?>" placeholder="Enter a role name">
+                    <input type="text" class="form-control" id="role" name="role" maxlength="50" required value="<?= set_value('role') ?>" placeholder="Enter a role name">
                     <?= service('validation')->showError('role') ?>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" maxlength="500" placeholder="Enter role description"><?= old('description') ?></textarea>
+                    <textarea class="form-control" id="description" name="description" maxlength="500" placeholder="Enter role description"><?= set_value('description') ?></textarea>
                     <?= service('validation')->showError('description') ?>
                 </div>
             </div>
@@ -34,15 +30,15 @@
                         <?php $lastSubGroup = '' ?>
                         <?php foreach ($permissions as $permission) : ?>
                             <?php
-                                $module = $permission->module;
-                                $submodule = $permission->submodule;
-                                ?>
+                            $module = $permission->module;
+                            $submodule = $permission->submodule;
+                            ?>
 
                             <?php if ($lastGroup != $module) : ?>
                                 <?php
-                                        $lastGroup = $module;
-                                        $lastGroupName = preg_replace('/ /', '_', $lastGroup);
-                                        ?>
+                                $lastGroup = $module;
+                                $lastGroupName = preg_replace('/ /', '_', $lastGroup);
+                                ?>
                                 <div class="col-12">
                                     <hr>
                                     <div class="custom-control custom-checkbox">
@@ -59,9 +55,9 @@
                                 <?php $lastSubGroup = $submodule; ?>
                                 <div class="col-12">
                                     <div class="mb-2 mt-3">
-                                        <h6>
+                                        <h5>
                                             <?= ucwords(preg_replace('/\-/', ' ', $lastSubGroup)) ?>
-                                        </h6>
+                                        </h5>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -88,5 +84,4 @@
             </div>
         </div>
     </form>
-</div>
 <?= $this->endSection() ?>

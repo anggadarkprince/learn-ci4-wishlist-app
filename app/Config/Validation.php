@@ -33,4 +33,9 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+    public $roles = [
+        'role' => 'required|max_length[50]|is_unique[roles.role]',
+        'description' => 'max_length[500]',
+        'permissions' => 'required'
+    ];
 }
