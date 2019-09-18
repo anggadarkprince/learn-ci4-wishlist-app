@@ -1,5 +1,7 @@
 <?php namespace Config;
 
+use CodeIgniter\Router\RouteCollection;
+
 /**
  * --------------------------------------------------------------------
  * URI Routing
@@ -75,14 +77,15 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Dashboard::index', ['as' => 'home']);
 //$routes->addRedirect('home', 'home');
 
-$routes->group('master', ['namespace' => 'App\Controllers\Master'], function($routes) {
+$routes->group('master', ['namespace' => 'App\Controllers\Master'], function(RouteCollection $routes) {
     $routes->resource('users');
     $routes->resource('roles');
 });
 
 //$routes->add('migrate', 'App\Controllers\Console\Migrate::index');
 //$routes->add('migrate/(.+)', 'App\Controllers\Console\Migrate::$1');
-$routes->group('migrate', ['namespace' => 'App\Controllers\Console'], function($routes) {
+$routes->get('asset/(.*)', 'App\Controllers\Asset::index');
+$routes->group('migrate', ['namespace' => 'App\Controllers\Console'], function(RouteCollection $routes) {
 	$routes->cli('/', 'Migrate');
 	$routes->cli('rollback/(:num)', 'Migrate::rollback/$1');
 	$routes->cli('init', 'Migrate::init');

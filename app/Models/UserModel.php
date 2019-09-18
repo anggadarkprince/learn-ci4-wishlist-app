@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
-
-class UserModel extends Model
+class UserModel extends BaseModel
 {
     protected $table = 'users';
     protected $primaryKey = 'id';
@@ -12,19 +10,15 @@ class UserModel extends Model
     protected $returnType = 'App\Entities\User';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['name', 'username', 'email', 'password', 'about', 'status', 'last_logged_in'];
+    protected $allowedFields = ['name', 'username', 'email', 'password', 'avatar', 'about', 'status', 'last_logged_in'];
     protected $useTimestamps = true;
-
-    protected $validationRules = [
-        'name' => 'required|max_length[100]',
-        'username' => 'required|max_length[50]|is_unique[users.username,id,{id}]',
-        'email' => 'required|valid_email|max_length[50]|is_unique[users.email,id,{id}]',
-        'password' => 'required|max_length[50]',
-    ];
-
 
     protected $beforeInsert = ['hashPassword'];
     protected $beforeUpdate = ['hashPassword'];
+
+    const STATUS_PENDING = 'PENDING';
+    const STATUS_ACTIVATED = 'ACTIVATED';
+    const STATUS_SUSPENDED = 'SUSPENDED';
 
     /**
      * Hash password before insert or update.
@@ -41,5 +35,17 @@ class UserModel extends Model
         }
 
         return $data;
+    }
+
+    public function filter($filters = [])
+    {
+        return parent::filter($filters)
+            ->select([
+                'users.*',
+                'GROUP_CONCAT(DISTINCT roles.role) AS roles'
+            ])
+            ->join('user_roles', 'user_roles.user_id = users.id', 'left')
+            ->join('roles', 'roles.id = user_roles.role_id', 'left')
+            ->groupBy('users.id');
     }
 }

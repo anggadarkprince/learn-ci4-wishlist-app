@@ -8,6 +8,7 @@ use App\Models\PermissionModel;
 use App\Models\RoleModel;
 use App\Models\RolePermissionModel;
 use CodeIgniter\HTTP\RedirectResponse;
+use ReflectionException;
 
 class Roles extends BaseController
 {
@@ -29,9 +30,8 @@ class Roles extends BaseController
         $data = $this->role->filter($_GET);
 
         if ($this->request->getGet('export')) {
-            $roles = $data->asArray()->findAll();
             $exporter = new Exporter();
-            $filePath = $exporter->exportFromArray($title, $roles);
+            $filePath = $exporter->exportFromArray($title, $data->asArray()->findAll());
             return $this->response->download($filePath, null, true);
         } else {
             $roles = $data->paginate();
@@ -69,14 +69,14 @@ class Roles extends BaseController
         $permission = new PermissionModel();
         $permissions = $permission->findAll();
 
-        return view('roles/new', compact('permissions', 'title', 'validation'));
+        return view('roles/new', compact('permissions', 'title'));
     }
 
     /**
      * Save new role data.
      *
      * @return RedirectResponse
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function create()
     {
@@ -139,7 +139,7 @@ class Roles extends BaseController
      *
      * @param $id
      * @return RedirectResponse
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function update($id)
     {
@@ -186,11 +186,13 @@ class Roles extends BaseController
     public function delete($id)
     {
         $role = $this->role->find($id);
+
         if ($this->role->delete($id)) {
             return redirect()->back()
                 ->with('status', 'warning')
                 ->with('message', "Role {$role->role} successfully deleted");
         }
+
         return redirect()->back()
             ->with('status', 'danger')
             ->with('message', "Delete role {$role->role} failed");

@@ -14,6 +14,7 @@ class Migration_create_users_table extends Migration
 			'username' => ['type' => 'VARCHAR', 'constraint' => 50, 'unique' => true],
 			'email' => ['type' => 'VARCHAR', 'constraint' => 100, 'unique' => true],
 			'password' => ['type' => 'VARCHAR', 'constraint' => 200],
+			'avatar' => ['type' => 'VARCHAR', 'constraint' => 300, 'null' => true],
 			'status' => ['type' => 'VARCHAR', 'constraint' => 50, 'default' => 'ACTIVATED'],
 			'about' => ['type' => 'TEXT', 'null' => true],
 			'last_logged_in' => ['type' => 'DATETIME', 'null' => true],

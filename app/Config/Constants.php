@@ -104,5 +104,6 @@ defined('PERMISSION_WISHLIST_DELETE') or define('PERMISSION_WISHLIST_DELETE', 'w
 defined('PERMISSION_WISHLIST_MANAGE') or define('PERMISSION_WISHLIST_MANAGE', 'wishlist-manage');
 
 
+defined('USER_RESERVED_ADMIN') or define('USER_RESERVED_ADMIN', 'admin');
 defined('ROLE_RESERVED_ADMIN') or define('ROLE_RESERVED_ADMIN', 'admin');
 defined('ROLE_RESERVED_USER') or define('ROLE_RESERVED_USER', 'user');
