@@ -24,6 +24,7 @@
         <div class="container-fluid mt--7">
             <?= $this->include('layouts/partials/alert') ?>
             <?= $this->renderSection('content') ?>
+            <?= $this->include('layouts/partials/footer') ?>
         </div>
     </div>
 

@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-sm-flex align-items-center justify-content-between">
-                <h4 class="card-title mb-sm-0">Data Roles</h4>
+                <h4 class="card-title mb-sm-0">Data Users</h4>
                 <div>
                     <a href="#modal-filter" data-toggle="modal" class="btn btn-outline-primary px-2">
                         <i class="mdi mdi-filter-variant"></i>
@@ -32,7 +32,7 @@
                 <tbody>
                 <?php
                 $statusLabels = [
-                    App\Models\UserModel::STATUS_PENDING => 'default',
+                    App\Models\UserModel::STATUS_PENDING => 'light',
                     App\Models\UserModel::STATUS_SUSPENDED => 'danger',
                     App\Models\UserModel::STATUS_ACTIVATED => 'success',
                 ];

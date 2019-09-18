@@ -77,6 +77,20 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Dashboard::index', ['as' => 'home']);
 //$routes->addRedirect('home', 'home');
 
+$routes->group('/', ['namespace' => 'App\Controllers\Auth'], function(RouteCollection $routes) {
+    $routes->match(['get', 'post'], 'login', 'Authentication::index');
+    $routes->get('logout', 'Authentication::logout');
+
+    $routes->get('register', 'Register::index');
+    $routes->post('register', 'Register::register');
+
+    $routes->get('forgot-password', 'Password::index');
+    $routes->post('forgot-password', 'Password::forgot');
+
+    $routes->get('reset-password', 'PasswordRecovery::index');
+    $routes->post('reset-password', 'PasswordRecovery::recover');
+});
+
 $routes->group('master', ['namespace' => 'App\Controllers\Master'], function(RouteCollection $routes) {
     $routes->resource('users');
     $routes->resource('roles');

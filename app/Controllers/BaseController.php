@@ -16,11 +16,13 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use CodeIgniter\Database\BaseConnection;
+use CodeIgniter\Session\Session;
 
 /**
  * Class BaseController
  * @package App\Controllers
  * @property BaseConnection $db
+ * @property Session $session
  */
 class BaseController extends Controller
 {
@@ -32,7 +34,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['value', 'request', 'form', 'url', 'asset'];
+	protected $helpers = ['auth', 'value', 'request', 'form', 'url', 'asset'];
 
 	/**
 	 * Constructor.
@@ -46,7 +48,7 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.:
-		// $this->session = \Config\Services::session();
+		$this->session = \Config\Services::session();
 		$this->db = \Config\Database::connect();
 	}
 

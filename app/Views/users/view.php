@@ -48,7 +48,7 @@
                                 <p class="form-control-plaintext" id="status">
                                     <?php
                                     $statusLabels = [
-                                        App\Models\UserModel::STATUS_PENDING => 'default',
+                                        App\Models\UserModel::STATUS_PENDING => 'light',
                                         App\Models\UserModel::STATUS_SUSPENDED => 'danger',
                                         App\Models\UserModel::STATUS_ACTIVATED => 'success',
                                     ];

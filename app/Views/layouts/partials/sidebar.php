@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="<?= site_url('/') ?>">
-                            Wishlist.app
+                            Wishlist
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -76,7 +76,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="<?= site_url('auth/logout') ?>">
+                    <a class="nav-link " href="<?= site_url('logout') ?>">
                         <i class="mdi mdi-exit-to-app text-orange"></i> Sign out
                     </a>
                 </li>

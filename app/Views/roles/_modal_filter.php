@@ -68,12 +68,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?= site_url(uri_string()) ?>" class="btn btn-light">
+                    <a href="<?= site_url(uri_string()) ?>" class="btn">
                         RESET
                     </a>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">
+                    <a href="#" class="btn" data-dismiss="modal">
                         CLOSE
-                    </button>
+                    </a>
                     <button type="submit" class="btn btn-primary">
                         APPLY FILTER
                     </button>

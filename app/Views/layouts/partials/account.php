@@ -5,7 +5,7 @@
                 <img alt="Avatar" src="<?= base_url('assets/img/layouts/no-avatar.png') ?>">
             </span>
             <div class="media-body ml-2 d-none d-lg-block">
-                <span class="mb-0 text-sm  font-weight-bold">Angga Ari</span>
+                <span class="mb-0 text-sm  font-weight-bold"><?= auth('name') ?></span>
             </div>
         </div>
     </a>

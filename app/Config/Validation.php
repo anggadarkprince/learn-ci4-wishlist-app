@@ -33,6 +33,12 @@ class Validation
     //--------------------------------------------------------------------
     // Rules
     //--------------------------------------------------------------------
+    public $login = [
+        'username' => 'required|max_length[50]',
+        'password' => 'required|max_length[50]',
+        'remember' => 'if_exist|in_list[,0,1,on]',
+    ];
+
     public $roles = [
         'role' => 'required|max_length[50]|is_unique[roles.role]',
         'description' => 'max_length[500]',
