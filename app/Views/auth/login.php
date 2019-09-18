@@ -41,7 +41,7 @@
                     <div class="text-center text-muted mb-4">
                         <small>Or sign in with credentials</small>
                     </div>
-                    <form action="<?= site_url('login') ?>" method="post" role="form">
+                    <form action="<?= site_url('login') . if_empty($_SERVER['QUERY_STRING'], '', '?') ?>" method="post" role="form">
                         <?= csrf_field() ?>
                         <div class="form-group mb-3">
                             <div class="input-group input-group-alternative">

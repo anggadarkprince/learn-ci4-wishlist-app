@@ -66,7 +66,7 @@ class Authentication extends BaseController
                             if (empty($intended)) {
                                 return redirect()->to('/dashboard');
                             }
-                            return redirect($intended);
+                            return redirect()->to($intended);
                         } else {
                             $additionalInfo = '';
                             if ($throttle == $maxTries) {

@@ -74,12 +74,11 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Dashboard::index', ['as' => 'home']);
-//$routes->addRedirect('home', 'home');
+$routes->get('/', 'Dashboard::index', ['as' => 'home', 'filter' => 'auth']);
+$routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
 
-$routes->group('/', ['namespace' => 'App\Controllers\Auth'], function(RouteCollection $routes) {
+$routes->group('/', ['namespace' => 'App\Controllers\Auth', 'filter' => 'guest'], function(RouteCollection $routes) {
     $routes->match(['get', 'post'], 'login', 'Authentication::index');
-    $routes->get('logout', 'Authentication::logout');
 
     $routes->get('register', 'Register::index');
     $routes->post('register', 'Register::register');
@@ -90,8 +89,9 @@ $routes->group('/', ['namespace' => 'App\Controllers\Auth'], function(RouteColle
     $routes->get('reset-password', 'PasswordRecovery::index');
     $routes->post('reset-password', 'PasswordRecovery::recover');
 });
+$routes->get('logout', 'App\Controllers\Auth\Authentication::logout', ['filter' => 'auth']);
 
-$routes->group('master', ['namespace' => 'App\Controllers\Master'], function(RouteCollection $routes) {
+$routes->group('master', ['namespace' => 'App\Controllers\Master', 'filter' => 'auth'], function(RouteCollection $routes) {
     $routes->resource('users');
     $routes->resource('roles');
 });

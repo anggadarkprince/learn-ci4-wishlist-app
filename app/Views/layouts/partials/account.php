@@ -31,7 +31,7 @@
             <span>Support</span>
         </a>
         <div class="dropdown-divider"></div>
-        <a href="<?= site_url('auth/logout') ?>" class="dropdown-item">
+        <a href="<?= site_url('logout') ?>" class="dropdown-item">
             <i class="mdi mdi-logout-variant"></i>
             <span>Sign out</span>
         </a>

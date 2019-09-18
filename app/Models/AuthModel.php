@@ -78,7 +78,7 @@ class AuthModel extends BaseModel
     public function logout()
     {
         $session = Services::session();
-        if ($session->has('auth.id')) {
+        if ($session->has('auth')) {
             $session->remove('auth');
             $session->destroy(); // optional
             return true;
