@@ -40,6 +40,10 @@ try {
         import("./components/validate").then(modalValidate => modalValidate.default());
     }
 
+    if ($('#form-register').length) {
+        import("./pages/register").then(register => register.default());
+    }
+
     if ($('#form-role').length) {
         import("./pages/role").then(role => role.default());
     }

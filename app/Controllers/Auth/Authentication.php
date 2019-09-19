@@ -51,11 +51,15 @@ class Authentication extends BaseController
                     $auth = new AuthModel();
                     $authenticated = $auth->authenticate($username, $password, $remember);
 
-                    if ($authenticated === UserModel::STATUS_PENDING || $authenticated === UserModel::STATUS_SUSPENDED) {
-                        $this->session->setFlashdata('status', 'danger');
-                        $this->session->setFlashdata('message', 'Your account has status <strong>' . $authenticated . '</strong>');
-                    } else {
-                        if ($authenticated) {
+                    if($authenticated['status']) {
+                        if ($authenticated['user']->status === UserModel::STATUS_PENDING) {
+                            $resendLink = ", if you not receive the email please <strong><a href='" . site_url('register/resend?email=' . $authenticated['user']->email) . "'>click this link</a></strong>";
+                            $this->session->setFlashdata('status', 'warning');
+                            $this->session->setFlashdata('message', 'Please confirm your email to activate your account' . $resendLink);
+                        } elseif($authenticated['user']->status === UserModel::STATUS_SUSPENDED) {
+                            $this->session->setFlashdata('status', 'danger');
+                            $this->session->setFlashdata('message', 'Your account is <strong>' . $authenticated . '</strong>');
+                        } else {
                             // remove login throttle if exist
                             $this->session->remove(['throttle', 'throttle_expired']);
 
@@ -67,19 +71,19 @@ class Authentication extends BaseController
                                 return redirect()->to('/dashboard');
                             }
                             return redirect()->to($intended);
-                        } else {
-                            $additionalInfo = '';
-                            if ($throttle == $maxTries) {
-                                $additionalInfo = ', your session will be locked';
-                            } elseif ($throttle == ($maxTries - 1)) {
-                                $additionalInfo = ', you have last login try';
-                            }
-                            $this->session->setFlashdata('status', 'danger');
-                            $this->session->setFlashdata('message', 'Username and password mismatch' . $additionalInfo);
-
-                            $throttle++;
-                            $this->session->set('throttle', $throttle);
                         }
+                    } else {
+                        $additionalInfo = '';
+                        if ($throttle == $maxTries) {
+                            $additionalInfo = ', your session will be locked';
+                        } elseif ($throttle == ($maxTries - 1)) {
+                            $additionalInfo = ', you have last login try';
+                        }
+                        $this->session->setFlashdata('status', 'danger');
+                        $this->session->setFlashdata('message', 'Username and password mismatch' . $additionalInfo);
+
+                        $throttle++;
+                        $this->session->set('throttle', $throttle);
                     }
                 }
             } else {

@@ -9,6 +9,8 @@ class UserTokenModel extends BaseModel
     protected $table = 'user_tokens';
     protected $primaryKey = 'token';
 
+    protected $allowedFields = ['email', 'token', 'type', 'max_activation', 'expired_at'];
+
     const TOKEN_REMEMBER = 'REMEMBER';
     const TOKEN_PASSWORD = 'PASSWORD';
     const TOKEN_REGISTRATION = 'REGISTRATION';
@@ -27,7 +29,7 @@ class UserTokenModel extends BaseModel
      */
     public function create($email, $tokenType = self::TOKEN_REGISTRATION, $length = 32, $maxActivation = 1, $expired_at = null)
     {
-        helper('string');
+        helper('text');
         $token = random_string('alnum', $length);
 
         $isTokenEmailExist = $this->where([
@@ -120,9 +122,9 @@ class UserTokenModel extends BaseModel
             return false;
         }
 
-        $result = $this->update([
-            'max_activation' => $tokenData['max_activation'] - 1,
-        ], ['token' => $token]);
+        $result = $this->update($token, [
+            'max_activation' => $tokenData->max_activation - 1,
+        ]);
 
         return $result;
     }

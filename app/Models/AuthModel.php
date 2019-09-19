@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Entities\User;
 use Config\Database;
 use Config\Services;
 use ReflectionException;
@@ -17,7 +18,7 @@ class AuthModel extends BaseModel
      * @param string $username
      * @param string $password
      * @param $remember
-     * @return bool
+     * @return array
      * @throws ReflectionException
      */
     public function authenticate($username, $password, $remember)
@@ -32,7 +33,7 @@ class AuthModel extends BaseModel
 
         if (!empty($user)) {
             if ($user->status != UserModel::STATUS_ACTIVATED) {
-                return $user->status;
+                return ['status' => true, 'user' => $user];
             }
             $hashedPassword = $user->password;
             if (password_verify($password, $hashedPassword)) {
@@ -66,10 +67,10 @@ class AuthModel extends BaseModel
                     }
                 }
 
-                return true;
+                return ['status' => true, 'user' => $user];
             }
         }
-        return false;
+        return ['status' => false, 'user' => $user];
     }
 
     /**

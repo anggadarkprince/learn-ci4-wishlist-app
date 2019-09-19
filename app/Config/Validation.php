@@ -39,6 +39,14 @@ class Validation
         'remember' => 'if_exist|in_list[,0,1,on]',
     ];
 
+    public $register = [
+        'name' => 'trim|required|max_length[50]',
+        'username' => 'required|max_length[50]|is_unique[users.username]',
+        'email' => 'required|max_length[50]|is_unique[users.email]',
+        'password' => 'required|min_length[6]',
+        'agreement' => 'required|in_list[,1,on]',
+    ];
+
     public $roles = [
         'role' => 'required|max_length[50]|is_unique[roles.role]',
         'description' => 'max_length[500]',
@@ -49,7 +57,7 @@ class Validation
         'name' => 'trim|required|max_length[50]',
         'username' => 'required|max_length[50]|is_unique[users.username]',
         'email' => 'required|max_length[50]|is_unique[users.email]',
-        'password' => 'min_length[6]',
+        'password' => 'required|min_length[6]',
         'confirm_password' => 'matches[password]',
         'status' => 'required',
         'avatar' => 'uploaded[avatar]|max_size[avatar,2048]|is_image[avatar]',

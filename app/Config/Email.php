@@ -7,26 +7,26 @@ class Email
 	/**
 	 * @var string
 	 */
-	public $fromEmail;
+	public $fromEmail = 'no-reply@wishlist.app';
 
 	/**
 	 * @var string
 	 */
-	public $fromName;
+	public $fromName = 'Support';
 
 	/**
 	 * The "user agent"
 	 *
 	 * @var string
 	 */
-	public $userAgent = 'CodeIgniter';
+	public $userAgent = 'Wishlist Mail';
 
 	/**
 	 * The mail sending protocol: mail, sendmail, smtp
 	 *
 	 * @var string
 	 */
-	public $protocol = 'mail';
+	public $protocol = 'smtp';
 
 	/**
 	 * The server path to Sendmail.
@@ -40,28 +40,28 @@ class Email
 	 *
 	 * @var string
 	 */
-	public $SMTPHost;
+	public $SMTPHost = 'smtp.mailtrap.io';
 
 	/**
 	 * SMTP Username
 	 *
 	 * @var string
 	 */
-	public $SMTPUser;
+	public $SMTPUser = '1a8c03e74960bb';
 
 	/**
 	 * SMTP Password
 	 *
 	 * @var string
 	 */
-	public $SMTPPass;
+	public $SMTPPass = 'f08900c28226ce';
 
 	/**
 	 * SMTP Port
 	 *
 	 * @var integer
 	 */
-	public $SMTPPort = 25;
+	public $SMTPPort = 465;
 
 	/**
 	 * SMTP Timeout (in seconds)
@@ -103,7 +103,7 @@ class Email
 	 *
 	 * @var string
 	 */
-	public $mailType = 'text';
+	public $mailType = 'html';
 
 	/**
 	 * Character set (utf-8, iso-8859-1, etc.)
@@ -117,7 +117,7 @@ class Email
 	 *
 	 * @var boolean
 	 */
-	public $validate = false;
+	public $validate = true;
 
 	/**
 	 * Email Priority. 1 = highest. 5 = lowest. 3 = normal

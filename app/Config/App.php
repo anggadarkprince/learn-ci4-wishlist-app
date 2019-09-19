@@ -6,6 +6,7 @@ class App extends BaseConfig
 {
 
     public $appName  = 'Wishlist';
+    public $appEmail  = 'support@wishlist.app';
     public $appVer  = '1.0';
 
 	/*

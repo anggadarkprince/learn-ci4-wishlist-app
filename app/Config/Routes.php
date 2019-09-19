@@ -82,6 +82,8 @@ $routes->group('/', ['namespace' => 'App\Controllers\Auth', 'filter' => 'guest']
 
     $routes->get('register', 'Register::index');
     $routes->post('register', 'Register::register');
+    $routes->get('register/resend', 'Register::resend');
+    $routes->get('register/confirm/(:alphanum)', 'Register::confirm/$1');
 
     $routes->get('forgot-password', 'Password::index');
     $routes->post('forgot-password', 'Password::forgot');
