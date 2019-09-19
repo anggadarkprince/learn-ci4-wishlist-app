@@ -6,6 +6,9 @@ use App\Controllers\BaseController;
 use App\Models\AuthModel;
 use App\Models\UserModel;
 use App\Models\UserTokenModel;
+use CodeIgniter\HTTP\RedirectResponse;
+use Config\Services;
+use Overtrue\Socialite\SocialiteManager;
 use ReflectionException;
 
 class Authentication extends BaseController
@@ -51,12 +54,12 @@ class Authentication extends BaseController
                     $auth = new AuthModel();
                     $authenticated = $auth->authenticate($username, $password, $remember);
 
-                    if($authenticated['status']) {
+                    if ($authenticated['status']) {
                         if ($authenticated['user']->status === UserModel::STATUS_PENDING) {
                             $resendLink = ", if you not receive the email please <strong><a href='" . site_url('register/resend?email=' . $authenticated['user']->email) . "'>click this link</a></strong>";
                             $this->session->setFlashdata('status', 'warning');
                             $this->session->setFlashdata('message', 'Please confirm your email to activate your account' . $resendLink);
-                        } elseif($authenticated['user']->status === UserModel::STATUS_SUSPENDED) {
+                        } elseif ($authenticated['user']->status === UserModel::STATUS_SUSPENDED) {
                             $this->session->setFlashdata('status', 'danger');
                             $this->session->setFlashdata('message', 'Your account is <strong>' . $authenticated . '</strong>');
                         } else {
@@ -93,6 +96,58 @@ class Authentication extends BaseController
         }
 
         return view('auth/login');
+    }
+
+    /**
+     * Redirect the user to the authentication page.
+     * @param $driver
+     * @return
+     */
+    public function redirectToProvider($driver)
+    {
+        $socialite = new SocialiteManager(config('social')->driver);
+
+        return $socialite->driver($driver)->redirect()->send();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     * @param $driver
+     * @return RedirectResponse
+     * @throws ReflectionException
+     */
+    public function handleProviderCallback($driver)
+    {
+        $socialite = new SocialiteManager(config('social')->driver);
+
+        $userData = $socialite->driver($driver)->user();
+        $username = if_empty($userData->getUsername(), url_title($userData->getName()));
+        $password = uniqid();
+
+        $user = new UserModel();
+        $foundUser = $user->where('email', $userData->getEmail())->get()->getRow();
+
+        if (empty($foundUser)) {
+            $userId = $user->insert([
+                'name' => $userData->getName(),
+                'username' => $username,
+                'email' => $userData->getEmail(),
+                'password' => password_hash($password, CRYPT_BLOWFISH),
+                'status' => UserModel::STATUS_ACTIVATED
+            ], true);
+        } else {
+            $userId = $foundUser->id;
+        }
+
+        if (!empty($userId)) {
+            $session = Services::session();
+            $session->set('auth', [
+                'id' => $userId,
+                'is_logged_in' => true
+            ]);
+        }
+
+        return redirect()->to('/login');
     }
 
     /**

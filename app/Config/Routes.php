@@ -90,6 +90,10 @@ $routes->group('/', ['namespace' => 'App\Controllers\Auth', 'filter' => 'guest']
 
     $routes->get('reset-password/(:alphanum)', 'Password::reset/$1');
     $routes->post('reset-password/(:alphanum)', 'Password::recover/$1');
+
+    $routes->get('login/(:alpha)', 'Authentication::redirectToProvider/$1');
+    $routes->get('login/(:alpha)/callback', 'Authentication::handleProviderCallback/$1');
+
 });
 $routes->get('logout', 'App\Controllers\Auth\Authentication::logout', ['filter' => 'auth']);
 

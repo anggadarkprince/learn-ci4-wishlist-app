@@ -27,11 +27,11 @@
                 <div class="card-header bg-transparent pb-4">
                     <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
                     <div class="btn-wrapper text-center">
-                        <a href="#" class="btn btn-neutral btn-icon mr-4">
+                        <a href="<?= site_url('login/github') ?>" class="btn btn-neutral btn-icon mr-4">
                             <span class="btn-inner--icon"><img src="<?= base_url('assets/img/icons/github.svg') ?>" alt="Github"></span>
                             <span class="btn-inner--text">Github</span>
                         </a>
-                        <a href="#" class="btn btn-neutral btn-icon">
+                        <a href="<?= site_url('login/google') ?>" class="btn btn-neutral btn-icon">
                             <span class="btn-inner--icon"><img src="<?= base_url('assets/img/icons/google.svg') ?>" alt="Google"></span>
                             <span class="btn-inner--text">Google</span>
                         </a>
