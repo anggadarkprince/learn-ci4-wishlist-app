@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <div class="input-group input-group-alternative mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                    <span class="input-group-text"><i class="mdi mdi-account-badge-horizontal-outline"></i></span>
                                 </div>
                                 <input class="form-control" placeholder="Full name" type="text" id="name" name="name" value="<?= set_value('name') ?>" required maxlength="50" aria-label="Full name">
                             </div>
@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <div class="input-group input-group-alternative mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                    <span class="input-group-text"><i class="mdi mdi-account-outline"></i></span>
                                 </div>
                                 <input class="form-control" placeholder="Username" type="text" id="username" name="username" value="<?= set_value('username') ?>" required maxlength="50" aria-label="Username">
                             </div>
@@ -64,7 +64,7 @@
                         <div class="form-group">
                             <div class="input-group input-group-alternative mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                    <span class="input-group-text"><i class="mdi mdi-email-outline"></i></span>
                                 </div>
                                 <input class="form-control" placeholder="Email address" type="email" id="email" name="email" value="<?= set_value('email') ?>" required maxlength="50" aria-label="Email address">
                             </div>
@@ -73,7 +73,7 @@
                         <div class="form-group">
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                    <span class="input-group-text"><i class="mdi mdi-lock-outline"></i></span>
                                 </div>
                                 <input class="form-control" placeholder="Password" type="password" id="password" name="password" value="<?= set_value('password') ?>" required minlength="6" maxlength="50" aria-label="Password">
                             </div>
@@ -94,10 +94,13 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block my-4">Create account</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block my-4" data-toggle="one-touch">Create account</button>
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="mt-3 text-center">
+                <a href="<?= site_url('login') ?>" class="text-light"><small>Has an account? login now</small></a>
             </div>
         </div>
     </div>

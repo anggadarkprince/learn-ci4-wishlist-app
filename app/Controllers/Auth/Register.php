@@ -3,7 +3,6 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\BaseController;
-use App\Models\AuthModel;
 use App\Models\UserModel;
 use App\Models\UserTokenModel;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -150,7 +149,7 @@ class Register extends BaseController
     public function confirm($token)
     {
         $userToken = new UserTokenModel();
-        $validToken = $userToken->getByTokenKey($token, true, true);
+        $validToken = $userToken->verifyToken($token, UserTokenModel::TOKEN_REGISTRATION, true, true);
 
         if (empty($validToken)) {
             return redirect()->to('/login')
@@ -159,7 +158,7 @@ class Register extends BaseController
         }
         $this->db->transStart();
 
-        $userToken->activateToken($token);
+        $userToken->activateToken($token, UserTokenModel::TOKEN_REGISTRATION);
 
         $user = new UserModel();
         $foundUser = $user->where('email', $validToken->email)->get()->getRow();

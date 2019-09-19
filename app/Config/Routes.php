@@ -88,8 +88,8 @@ $routes->group('/', ['namespace' => 'App\Controllers\Auth', 'filter' => 'guest']
     $routes->get('forgot-password', 'Password::index');
     $routes->post('forgot-password', 'Password::forgot');
 
-    $routes->get('reset-password', 'PasswordRecovery::index');
-    $routes->post('reset-password', 'PasswordRecovery::recover');
+    $routes->get('reset-password/(:alphanum)', 'Password::reset/$1');
+    $routes->post('reset-password/(:alphanum)', 'Password::recover/$1');
 });
 $routes->get('logout', 'App\Controllers\Auth\Authentication::logout', ['filter' => 'auth']);
 

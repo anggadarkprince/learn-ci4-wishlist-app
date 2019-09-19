@@ -42,9 +42,15 @@ class Validation
     public $register = [
         'name' => 'trim|required|max_length[50]',
         'username' => 'required|max_length[50]|is_unique[users.username]',
-        'email' => 'required|max_length[50]|is_unique[users.email]',
+        'email' => 'required|max_length[50]|valid_email|is_unique[users.email]',
         'password' => 'required|min_length[6]',
         'agreement' => 'required|in_list[,1,on]',
+    ];
+
+    public $recover = [
+        'email' => 'required|max_length[50]|valid_email',
+        'password' => 'required|min_length[6]',
+        'confirm_password' => 'matches[password]',
     ];
 
     public $roles = [
@@ -56,7 +62,7 @@ class Validation
     public $users = [
         'name' => 'trim|required|max_length[50]',
         'username' => 'required|max_length[50]|is_unique[users.username]',
-        'email' => 'required|max_length[50]|is_unique[users.email]',
+        'email' => 'required|max_length[50]|valid_email|is_unique[users.email]',
         'password' => 'required|min_length[6]',
         'confirm_password' => 'matches[password]',
         'status' => 'required',

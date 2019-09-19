@@ -68,55 +68,45 @@ class UserTokenModel extends BaseModel
      *
      * @param string $token
      * @param string $tokenType
-     * @return bool|string
+     * @param bool $checkActivation
+     * @param bool $checkExpiredDate
+     * @return bool|object
      */
-    public function verifyToken($token, $tokenType)
+    public function verifyToken($token, $tokenType, $checkActivation = false, $checkExpiredDate = false)
     {
-        $token = $this->getWhere([
+        $token = $this->where([
             'token' => $token,
             'type' => $tokenType
-        ])->getRow();
+        ]);
 
-        if (!empty($token)) {
-            return $token->email;
+        if ($checkActivation) {
+            $token->where('max_activation >', 0);
+        }
+
+        if ($checkExpiredDate) {
+            $token->where('expired_at >= DATE(NOW())');
+        }
+
+        $result = $token->get()->getRow();
+
+        if (!empty($result)) {
+            return $result;
         }
 
         return false;
     }
 
     /**
-     * Get token data by it's token value.
-     *
-     * @param $token
-     * @param bool $checkActivation
-     * @param bool $checkExpiredDate
-     * @return mixed
-     */
-    public function getByTokenKey($token, $checkActivation = false, $checkExpiredDate = false)
-    {
-        $userToken = $this->where('token', $token);
-
-        if ($checkActivation) {
-            $userToken->where('max_activation >', 0);
-        }
-
-        if ($checkExpiredDate) {
-            $userToken->where('expired_at >= DATE(NOW())');
-        }
-
-        return $userToken->get()->getRow();
-    }
-
-    /**
      * Activate token use, decrease token max activation value.
      *
      * @param $token
+     * @param $type
      * @return mixed
      * @throws ReflectionException
      */
-    public function activateToken($token)
+    public function activateToken($token, $type)
     {
-        $tokenData = $this->getByTokenKey($token, true);
+        $tokenData = $this->verifyToken($token, $type, true);
 
         if (empty($tokenData)) {
             return false;

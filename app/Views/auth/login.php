@@ -69,7 +69,7 @@
                         </div>
                         <?= service('validation')->showError('remember') ?>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block my-4">Sign in</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block my-4" data-toggle="one-touch" data-touch-message="Logging in...">Sign in</button>
                         </div>
                     </form>
                 </div>

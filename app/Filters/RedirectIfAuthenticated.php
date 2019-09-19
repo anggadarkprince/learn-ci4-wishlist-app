@@ -12,7 +12,7 @@ class RedirectIfAuthenticated implements FilterInterface
     public function before(RequestInterface $request)
     {
         if (AuthModel::isLoggedIn()) {
-            return redirect()->to('dashboard');
+            return redirect()->to('/dashboard');
         }
     }
 
