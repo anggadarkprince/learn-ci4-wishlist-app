@@ -102,6 +102,11 @@ $routes->group('master', ['namespace' => 'App\Controllers\Master', 'filter' => '
     $routes->resource('roles');
 });
 
+$routes->group('/', ['namespace' => 'App\Controllers\Utility', 'filter' => 'auth'], function(RouteCollection $routes) {
+    $routes->get('backup', 'Backup::index');
+    $routes->get('backup/(:alpha)', 'Backup::$1');
+});
+
 //$routes->add('migrate', 'App\Controllers\Console\Migrate::index');
 //$routes->add('migrate/(.+)', 'App\Controllers\Console\Migrate::$1');
 $routes->get('asset/(.*)', 'App\Controllers\Asset::index');
