@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/app') ?>
 
 <?= $this->section('content') ?>
-    <form action="<?= site_url('master/users/' . $user->id) ?>" method="POST" id="form-role" class="edit">
+    <form action="<?= site_url('master/users/' . $user->id) ?>" method="POST"  enctype="multipart/form-data" id="form-user" class="edit">
         <?= csrf_field() ?>
         <input type="hidden" name="_method" value="PUT">
         <div class="card grid-margin">
@@ -33,9 +33,9 @@
                 </div>
                 <div class="form-group">
                     <label>Avatar</label>
-                    <input type="file" id="avatar" name="avatar" class="file-upload-default" data-max-size="3000000">
+                    <input type="file" id="avatar" name="avatar" class="file-upload-default" data-max-size="3000000" accept="image/*">
                     <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" value="<?= $user->avatar ?>" disabled placeholder="Upload photo" aria-label="path" accept="image/*">
+                        <input type="text" class="form-control file-upload-info" value="<?= $user->avatar ?>" disabled placeholder="Upload photo" aria-label="path">
                         <span class="input-group-append">
                         <button class="file-upload-browse btn btn-success btn-simple-upload" type="button">
                             Upload

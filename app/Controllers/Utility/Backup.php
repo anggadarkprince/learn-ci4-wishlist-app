@@ -15,7 +15,7 @@ class Backup extends BaseController
      */
     public function index()
     {
-        return view('backup/index');
+        return view('backup/index', ['title' => 'Backup']);
     }
 
     /**

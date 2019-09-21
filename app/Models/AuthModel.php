@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Entities\User;
 use Config\Database;
 use Config\Services;
 use ReflectionException;
@@ -112,7 +111,7 @@ class AuthModel extends BaseModel
     {
         $session = Services::session();
         $id = 0;
-        if ($session->has('auth.id')) {
+        if ($session->has('auth') && !empty($session->get('auth.id'))) {
             $id = $session->get('auth.id');
         }
         $result = Database::connect()
@@ -120,7 +119,6 @@ class AuthModel extends BaseModel
             ->where(['id' => $id])
             ->get()
             ->getRow();
-
 
         if (empty($result)) {
             return $default;

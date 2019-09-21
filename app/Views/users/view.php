@@ -26,7 +26,7 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="avatar">Avatar</label>
                             <div class="col-sm-8">
-                                <img src="<?= base_url(if_empty($user->avatar, 'assets/dist/img/layouts/no-avatar.png', 'uploads/')) ?>"
+                                <img src="<?= base_url(if_empty($user->avatar, 'assets/img/layouts/no-avatar.png', 'uploads/')) ?>"
                                      alt="avatar" class="img-fluid rounded my-2" style="max-width: 100px">
                             </div>
                         </div>

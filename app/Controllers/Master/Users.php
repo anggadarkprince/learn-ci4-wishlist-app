@@ -167,6 +167,7 @@ class Users extends BaseController
             'name' => 'trim|required|max_length[50]',
             'username' => 'required|max_length[50]|is_unique[users.username,id,' . $id . ']',
             'email' => 'required|max_length[50]|is_unique[users.email,id,' . $id . ']',
+            'password' => 'permit_empty|min_length[6]',
             'confirm_password' => 'matches[password]',
             'status' => 'required',
             'roles' => 'required',

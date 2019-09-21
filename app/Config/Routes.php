@@ -107,6 +107,12 @@ $routes->group('/', ['namespace' => 'App\Controllers\Utility', 'filter' => 'auth
     $routes->get('backup/(:alpha)', 'Backup::$1');
 });
 
+
+$routes->group('/', ['filter' => 'auth'], function (RouteCollection $routes) {
+    $routes->get('account', 'Account::index');
+    $routes->post('account', 'Account::update');
+});
+
 //$routes->add('migrate', 'App\Controllers\Console\Migrate::index');
 //$routes->add('migrate/(.+)', 'App\Controllers\Console\Migrate::$1');
 $routes->get('asset/(.*)', 'App\Controllers\Asset::index');

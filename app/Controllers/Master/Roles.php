@@ -105,7 +105,7 @@ class Roles extends BaseController
 
         return redirect()->back()->withInput()
             ->with('status', 'warning')
-            ->with('message', "Create role {$this->request->getPost('role')} failed, try again or contact administrator");
+            ->with('message', "Create role {$this->request->getPost('role')} failed, try again or contact our support");
     }
 
     /**
