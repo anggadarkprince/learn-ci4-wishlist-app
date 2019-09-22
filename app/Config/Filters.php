@@ -12,15 +12,17 @@ class Filters extends BaseConfig
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
 		'auth' => \App\Filters\MustAuthenticated::class,
 		'guest' => \App\Filters\RedirectIfAuthenticated::class,
+		'logger' => \App\Filters\Logger::class,
 	];
 
 	// Always applied before every request
 	public $globals = [
 		'before' => [
 			//'honeypot'
-			// 'csrf',
+			'csrf',
 		],
 		'after'  => [
+			'logger',
 			'toolbar',
 			//'honeypot'
 		],

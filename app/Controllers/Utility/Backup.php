@@ -11,7 +11,7 @@ use ZipArchive;
 class Backup extends BaseController
 {
     /**
-     * Show log index page.
+     * Show backup index page.
      */
     public function index()
     {

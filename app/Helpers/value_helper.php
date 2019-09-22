@@ -69,16 +69,22 @@ if (!function_exists('if_empty')) {
 if (!function_exists('get_if_exist')) {
     /**
      * Helper get decimal value if needed.
-     * @param $array
+     * @param $data
      * @param string $key
      * @param string $default
-     * @return array|string
+     * @return array|object|string
      */
-    function get_if_exist($array, $key = '', $default = '')
+    function get_if_exist($data, $key = '', $default = '')
     {
-        if (is_array($array) && key_exists($key, if_empty($array, []))) {
-            if (!empty($array[$key])) {
-                return $array[$key];
+        if (is_array($data) && key_exists($key, if_empty($data, []))) {
+            if (!empty($data[$key])) {
+                return $data[$key];
+            }
+        }
+
+        if (is_object($data) && property_exists($data, $key)) {
+            if (!empty($data->$key)) {
+                return $data->$key;
             }
         }
 

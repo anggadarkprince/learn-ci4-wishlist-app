@@ -8,6 +8,45 @@ use CodeIgniter\Model;
 
 class BaseModel extends Model
 {
+    protected $beforeInsert = ['insertLog'];
+    protected $beforeUpdate = ['updateLog'];
+    protected $beforeDelete = ['deleteLog'];
+
+    protected function insertLog(array $data)
+    {
+        $this->callbackDML('insert', $data['data']);
+        return $data;
+    }
+
+    protected function updateLog(array $data)
+    {
+        $this->callbackDML('update', $data['data']);
+        return $data;
+    }
+
+    protected function deleteLog(array $data)
+    {
+        $this->callbackDML('delete', $data);
+        return $data;
+    }
+
+    protected function callbackDML(string $action, array $data)
+    {
+        if ($this->table != 'logs') {
+            $log = new LogModel();
+            $log->insert([
+                'event_type' => 'query-' . $action,
+                'event_access' => get_class($this),
+                'data' => json_encode([
+                    'path' => current_url(),
+                    'data' => $data,
+                    'query' => $this->showLastQuery(),
+                    'table' => $this->table
+                ]),
+                'created_by' => AuthModel::loginData('id', 0),
+            ]);
+        }
+    }
 
     /**
      * Get all data with filters.
@@ -20,7 +59,9 @@ class BaseModel extends Model
         if (key_exists('search', $filters) && !empty($filters['search'])) {
             $fields = $this->db->getFieldData($this->table);
             foreach ($fields as $field) {
-                $this->orLike($field->name, trim($filters['search']));
+                if ($field->name != 'id' && !preg_match('/_id/', $field->name)) {
+                    $this->orLike($this->table . '.' . $field->name, trim($filters['search']));
+                }
             }
         }
 

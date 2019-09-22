@@ -105,6 +105,10 @@ $routes->group('master', ['namespace' => 'App\Controllers\Master', 'filter' => '
 $routes->group('/', ['namespace' => 'App\Controllers\Utility', 'filter' => 'auth'], function(RouteCollection $routes) {
     $routes->get('backup', 'Backup::index');
     $routes->get('backup/(:alpha)', 'Backup::$1');
+
+    $routes->get('logs', 'Logs::index');
+    $routes->get('logs/(:alpha)', 'Logs::$1');
+    $routes->get('logs/view/(:num)', 'Logs::view/$1');
 });
 
 
