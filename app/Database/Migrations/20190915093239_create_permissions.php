@@ -1,4 +1,6 @@
-<?php namespace App\Database\Migrations;
+<?php
+
+namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
@@ -16,7 +18,7 @@ class Migration_create_permissions_table extends Migration
 		$this->forge->addField("`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
 
 		$this->forge->addPrimaryKey('id');
-		
+
 		$this->forge->createTable('permissions', true);
 	}
 

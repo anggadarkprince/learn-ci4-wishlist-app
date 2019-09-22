@@ -1,4 +1,6 @@
-<?php namespace App\Database\Migrations;
+<?php
+
+namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
@@ -14,7 +16,7 @@ class Migration_create_whishlist_participants_table extends Migration
 			'description' => ['type' => 'TEXT', 'null' => true],
 		]);
 		$this->forge->addField("`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
-		
+
 		$this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->addPrimaryKey('id');
 

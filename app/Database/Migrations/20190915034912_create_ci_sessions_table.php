@@ -1,10 +1,11 @@
-<?php namespace App\Database\Migrations;
+<?php
+
+namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
 class Migration_create_ci_sessions_table extends Migration
 {
-
 	public function up()
 	{
 		$this->forge->addField([
@@ -35,8 +36,6 @@ class Migration_create_ci_sessions_table extends Migration
 		$this->forge->addKey('timestamp');
 		$this->forge->createTable('ci_sessions', true);
 	}
-
-	//--------------------------------------------------------------------
 
 	public function down()
 	{

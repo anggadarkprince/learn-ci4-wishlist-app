@@ -1,4 +1,6 @@
-<?php namespace App\Database\Migrations;
+<?php
+
+namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
@@ -15,11 +17,11 @@ class Migration_create_categories_table extends Migration
 		$this->forge->addField("`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
 		$this->forge->addField("`updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP");
 		$this->forge->addField("`deleted_at` TIMESTAMP NULL DEFAULT NULL");
-		
+
 		$this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->addPrimaryKey('id');
 		$this->forge->addKey('category');
-		
+
 		$this->forge->createTable('categories', true);
 	}
 

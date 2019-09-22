@@ -1,4 +1,6 @@
-<?php namespace App\Database\Migrations;
+<?php
+
+namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
@@ -13,10 +15,10 @@ class Migration_create_whishlist_details_table extends Migration
 		]);
 		$this->forge->addField("`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
 		$this->forge->addField("`updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP");
-		
+
 		$this->forge->addForeignKey('whishlist_id', 'whishlists', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->addPrimaryKey('id');
-		
+
 		$this->forge->createTable('whishlist_details', true);
 	}
 

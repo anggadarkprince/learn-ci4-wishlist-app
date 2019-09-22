@@ -25,7 +25,7 @@ class Migration_create_users_table extends Migration
 
 		$this->forge->addPrimaryKey('id');
 		$this->forge->addKey('name');
-		
+
 		$this->forge->createTable('users', true);
 	}
 
