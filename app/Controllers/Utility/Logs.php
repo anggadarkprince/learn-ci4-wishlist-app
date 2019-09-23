@@ -50,7 +50,7 @@ class Logs extends BaseController
             return $this->response->download($filePath, null, true);
         }
 
-        return view('logs/system', ['title' => 'System Logs', 'logs' => $logs]);
+        return view('logs/system', ['title' => 'Logs', 'logs' => $logs]);
     }
 
     /**
@@ -58,7 +58,7 @@ class Logs extends BaseController
      */
     public function access()
     {
-        $title = 'Access Logs';
+        $title = 'Logs';
         $log = new LogModel();
         $data = $log->filter($_GET);
 
@@ -87,10 +87,12 @@ class Logs extends BaseController
 
     /**
      * View log access detail
+     * @param $id
+     * @return string
      */
     public function view($id)
     {
-        $title = 'View Log Detail';
+        $title = 'Logs';
 
         $logModel = new LogModel();
         $log = $logModel->filter()->find($id);

@@ -4,14 +4,14 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Migration_create_whishlists_table extends Migration
+class Migration_create_wishlists_table extends Migration
 {
 	public function up()
 	{
 		$this->forge->addField([
 			'id' => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => TRUE],
 			'user_id' => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true],
-			'whish' => ['type' => 'VARCHAR', 'constraint' => 100],
+			'wish' => ['type' => 'VARCHAR', 'constraint' => 100],
 			'description' => ['type' => 'TEXT', 'null' => true],
 			'target' => ['type' => 'DATE', 'null' => true],
 			'progress' => ['type' => 'INT', 'constraint' => 11, 'default' => 0],
@@ -25,9 +25,9 @@ class Migration_create_whishlists_table extends Migration
 
 		$this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->addPrimaryKey('id');
-		$this->forge->addKey('whish');
+		$this->forge->addKey('wish');
 
-		$this->forge->createTable('whishlists', true);
+		$this->forge->createTable('wishlists', true);
 	}
 
 	public function down()

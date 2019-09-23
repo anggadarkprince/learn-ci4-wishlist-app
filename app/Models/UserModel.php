@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\BaseBuilder;
+
 class UserModel extends BaseModel
 {
     protected $table = 'users';
@@ -37,6 +39,12 @@ class UserModel extends BaseModel
         return $data;
     }
 
+    /**
+     * Filter data by conditions.
+     *
+     * @param array $filters
+     * @return BaseModel|BaseBuilder
+     */
     public function filter($filters = [])
     {
         return parent::filter($filters)

@@ -107,3 +107,12 @@ defined('PERMISSION_WISHLIST_MANAGE') or define('PERMISSION_WISHLIST_MANAGE', 'w
 defined('USER_RESERVED_ADMIN') or define('USER_RESERVED_ADMIN', 'admin');
 defined('ROLE_RESERVED_ADMIN') or define('ROLE_RESERVED_ADMIN', 'admin');
 defined('ROLE_RESERVED_USER') or define('ROLE_RESERVED_USER', 'user');
+
+
+defined('SETTING_NOTIFICATION_NEWS_UPDATE') or define('SETTING_NOTIFICATION_NEWS_UPDATE', 'notification-news-update');
+defined('SETTING_NOTIFICATION_LOGIN_DEVICE') or define('SETTING_NOTIFICATION_LOGIN_DEVICE', 'notification-login-device');
+defined('SETTING_NOTIFICATION_WISHLIST_PROGRESS') or define('SETTING_NOTIFICATION_WISHLIST_PROGRESS', 'notification-wishlist-progress');
+defined('SETTING_NOTIFICATION_PARTICIPANT_WISHLIST') or define('SETTING_NOTIFICATION_PARTICIPANT_WISHLIST', 'notification-participant-wishlist');
+
+defined('SETTING_PRIVACY_ALLOW_DISCOVERY') or define('SETTING_PRIVACY_ALLOW_DISCOVERY', 'privacy-allow-discovery');
+defined('SETTING_PRIVACY_ALLOW_PARTICIPANT') or define('SETTING_PRIVACY_AUTO_PARTICIPANT', 'privacy-auto-participant');

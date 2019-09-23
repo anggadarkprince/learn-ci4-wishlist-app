@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\BaseBuilder;
+use ReflectionException;
+
 class LogModel extends BaseModel
 {
     protected $table = 'logs';
@@ -10,7 +13,10 @@ class LogModel extends BaseModel
     protected $allowedFields = ['event_type', 'event_access', 'data', 'created_by', 'created_at'];
 
     /**
-     * Basic filter data
+     * Basic filter data.
+     *
+     * @param array $filters
+     * @return BaseBuilder
      */
     public function filter($filters = [])
     {
@@ -30,7 +36,7 @@ class LogModel extends BaseModel
      * @param boolean      $returnID Whether insert ID should be returned or not.
      *
      * @return integer|string|boolean
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function insert($data = null, bool $returnID = true)
     {

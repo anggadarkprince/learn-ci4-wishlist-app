@@ -54,7 +54,7 @@
                 </div>
             </form>
             <!-- Navigation -->
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mb-md-3">
                 <li class="nav-item active">
                     <a class=" nav-link active" href="<?= site_url('dashboard') ?>">
                         <i class="mdi mdi-monitor-dashboard text-yellow"></i> Dashboard
@@ -81,10 +81,8 @@
                     </a>
                 </li>
             </ul>
-            <!-- Divider -->
-            <hr class="my-3">
             <!-- Heading -->
-            <h6 class="navbar-heading text-muted">Preference</h6>
+            <h6 class="navbar-heading text-muted">Personalize</h6>
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
@@ -97,6 +95,11 @@
                         <i class="mdi mdi-settings-outline"></i> Setting
                     </a>
                 </li>
+            </ul>
+            <!-- Heading -->
+            <h6 class="navbar-heading text-muted">Preference</h6>
+            <!-- Navigation -->
+            <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
                     <a class="nav-link" href="<?= site_url('backup') ?>">
                         <i class="mdi mdi-backup-restore"></i> Backup

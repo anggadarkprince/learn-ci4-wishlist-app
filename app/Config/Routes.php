@@ -115,6 +115,9 @@ $routes->group('/', ['namespace' => 'App\Controllers\Utility', 'filter' => 'auth
 $routes->group('/', ['filter' => 'auth'], function (RouteCollection $routes) {
     $routes->get('account', 'Account::index');
     $routes->post('account', 'Account::update');
+
+    $routes->post('setting', 'Setting::index');
+    $routes->put('setting', 'Setting::update');
 });
 
 //$routes->add('migrate', 'App\Controllers\Console\Migrate::index');
