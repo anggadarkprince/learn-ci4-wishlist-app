@@ -95,29 +95,33 @@ $routes->group('/', ['namespace' => 'App\Controllers\Auth', 'filter' => 'guest']
     $routes->get('login/(:alpha)/callback', 'Authentication::handleProviderCallback/$1');
 
 });
-$routes->get('logout', 'App\Controllers\Auth\Authentication::logout', ['filter' => 'auth']);
-
-$routes->group('master', ['namespace' => 'App\Controllers\Master', 'filter' => 'auth'], function(RouteCollection $routes) {
-    $routes->resource('users');
-    $routes->resource('roles');
-});
-
-$routes->group('/', ['namespace' => 'App\Controllers\Utility', 'filter' => 'auth'], function(RouteCollection $routes) {
-    $routes->get('backup', 'Backup::index');
-    $routes->get('backup/(:alpha)', 'Backup::$1');
-
-    $routes->get('logs', 'Logs::index');
-    $routes->get('logs/(:alpha)', 'Logs::$1');
-    $routes->get('logs/view/(:num)', 'Logs::view/$1');
-});
-
 
 $routes->group('/', ['filter' => 'auth'], function (RouteCollection $routes) {
+    $routes->group('master', ['namespace' => 'App\Controllers\Master'], function (RouteCollection $routes) {
+        $routes->resource('users');
+        $routes->resource('roles');
+    });
+
+    $routes->group('/', ['namespace' => 'App\Controllers\Wishlist'], function (RouteCollection $routes) {
+        $routes->resource('wishlists');
+    });
+
+    $routes->group('/', ['namespace' => 'App\Controllers\Utility'], function (RouteCollection $routes) {
+        $routes->get('backup', 'Backup::index');
+        $routes->get('backup/(:alpha)', 'Backup::$1');
+
+        $routes->get('logs', 'Logs::index');
+        $routes->get('logs/(:alpha)', 'Logs::$1');
+        $routes->get('logs/view/(:num)', 'Logs::view/$1');
+    });
+
     $routes->get('account', 'Account::index');
     $routes->post('account', 'Account::update');
 
     $routes->get('setting', 'Setting::index');
     $routes->put('setting', 'Setting::update');
+
+    $routes->get('logout', 'App\Controllers\Auth\Authentication::logout');
 });
 
 $routes->get('/(:alpha)', 'Page::index/$1');

@@ -70,4 +70,10 @@ class Validation
         'avatar' => 'uploaded[avatar]|max_size[avatar,2048]|is_image[avatar]',
         'roles' => 'required',
     ];
+
+    public $wishlists = [
+        'wish' => 'trim|required|max_length[50]',
+        'target' => 'required|max_length[20]',
+        'description' => 'max_length[500]',
+    ];
 }

@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
-
-class WishlistModel extends Model
+class WishlistModel extends BaseModel
 {
     protected $table = 'wishlists';
 
