@@ -50,18 +50,27 @@
                                 <span class="nav-link-inner--text">Discovery</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-icon" href="<?= site_url('register') ?>">
-                                <i class="mdi mdi-account-plus-outline"></i>
-                                <span class="nav-link-inner--text">Register</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-icon" href="<?= site_url('login') ?>">
-                                <i class="mdi mdi-login-variant"></i>
-                                <span class="nav-link-inner--text">Login</span>
-                            </a>
-                        </li>
+                        <?php if(auth('id')): ?>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-icon" href="<?= site_url('wishlists') ?>">
+                                    <i class="mdi mdi-gift-outline"></i>
+                                    <span class="nav-link-inner--text">My Wishlist</span>
+                                </a>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-icon" href="<?= site_url('register') ?>">
+                                    <i class="mdi mdi-account-plus-outline"></i>
+                                    <span class="nav-link-inner--text">Register</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-icon" href="<?= site_url('login') ?>">
+                                    <i class="mdi mdi-login-variant"></i>
+                                    <span class="nav-link-inner--text">Login</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
@@ -73,7 +82,7 @@
         </div>
 
         <!-- Page content -->
-        <div class="container mt--8 pb-5">
+        <div class="container mt--7 pb-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-7">
                     <?= $this->include('layouts/partials/alert') ?>

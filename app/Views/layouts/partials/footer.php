@@ -12,13 +12,13 @@
         <div class="col-xl-6">
             <ul class="nav nav-footer justify-content-center justify-content-xl-end">
                 <li class="nav-item">
-                    <a href="http://angga-ari.com" class="nav-link" target="_blank">Angga Ari</a>
+                    <a href="http://angga-ari.com" class="nav-link">Angga Ari</a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= site_url('about') ?>" class="nav-link" target="_blank">About Us</a>
+                    <a href="<?= site_url('about') ?>" class="nav-link">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= site_url('help') ?>" class="nav-link" target="_blank">Help</a>
+                    <a href="<?= site_url('help') ?>" class="nav-link">Help</a>
                 </li>
             </ul>
         </div>

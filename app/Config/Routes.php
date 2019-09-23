@@ -120,6 +120,8 @@ $routes->group('/', ['filter' => 'auth'], function (RouteCollection $routes) {
     $routes->put('setting', 'Setting::update');
 });
 
+$routes->get('/(:alpha)', 'Page::index/$1');
+
 //$routes->add('migrate', 'App\Controllers\Console\Migrate::index');
 //$routes->add('migrate/(.+)', 'App\Controllers\Console\Migrate::$1');
 $routes->get('asset/(.*)', 'App\Controllers\Asset::index');

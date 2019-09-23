@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use CodeIgniter\Model;
+use ReflectionException;
 
 class BaseModel extends Model
 {
@@ -12,24 +13,44 @@ class BaseModel extends Model
     protected $beforeUpdate = ['updateLog'];
     protected $beforeDelete = ['deleteLog'];
 
+    /**
+     * @param array $data
+     * @return array
+     * @throws ReflectionException
+     */
     protected function insertLog(array $data)
     {
         $this->callbackDML('insert', $data['data']);
         return $data;
     }
 
+    /**
+     * @param array $data
+     * @return array
+     * @throws ReflectionException
+     */
     protected function updateLog(array $data)
     {
         $this->callbackDML('update', $data['data']);
         return $data;
     }
 
+    /**
+     * @param array $data
+     * @return array
+     * @throws ReflectionException
+     */
     protected function deleteLog(array $data)
     {
         $this->callbackDML('delete', $data);
         return $data;
     }
 
+    /**
+     * @param string $action
+     * @param array $data
+     * @throws ReflectionException
+     */
     protected function callbackDML(string $action, array $data)
     {
         if ($this->table != 'logs') {
@@ -40,7 +61,7 @@ class BaseModel extends Model
                 'data' => json_encode([
                     'path' => current_url(),
                     'data' => $data,
-                    'query' => $this->showLastQuery(),
+                    'query' => $this->db->showLastQuery(),
                     'table' => $this->table
                 ]),
                 'created_by' => AuthModel::loginData('id', 0),
