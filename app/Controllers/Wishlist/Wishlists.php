@@ -90,7 +90,7 @@ class Wishlists extends BaseController
             $wishlistId = $this->wishlist->insert($wishData);
 
             $wishlistDetail = new WishlistDetailModel();
-            foreach ($this->request->getPost('details') as $detail) {
+            foreach (if_empty($this->request->getPost('details'), []) as $detail) {
                 $wishlistDetail->insert([
                     'wishlist_id' => $wishlistId,
                     'detail' => $detail['detail']
@@ -149,7 +149,7 @@ class Wishlists extends BaseController
 
             $wishlistDetail = new WishlistDetailModel();
             $wishlistDetail->where('wishlist_id', $id)->delete();
-            foreach ($this->request->getPost('details') as $detail) {
+            foreach (if_empty($this->request->getPost('details'), []) as $detail) {
                 $wishlistDetail->insert([
                     'wishlist_id' => $id,
                     'detail' => $detail['detail']

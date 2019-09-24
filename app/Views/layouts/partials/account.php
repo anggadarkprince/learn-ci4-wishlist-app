@@ -22,7 +22,7 @@
             <i class="mdi mdi-settings-outline"></i>
             <span>Settings</span>
         </a>
-        <a href="<?= site_url('wishlist') ?>" class="dropdown-item">
+        <a href="<?= site_url('wishlists') ?>" class="dropdown-item">
             <i class="mdi mdi-gift-outline"></i>
             <span>Wishlist</span>
         </a>

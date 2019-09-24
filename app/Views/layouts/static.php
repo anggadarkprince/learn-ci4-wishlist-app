@@ -42,8 +42,18 @@
                             </div>
                         </div>
                     </div>
+                    <form action="<?= site_url('discovery') ?>" class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+                        <div class="form-group mb-0">
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="mdi mdi-magnify"></i></span>
+                                </div>
+                                <input class="form-control" name="q" value="<?= get_url_param('q') ?>" placeholder="Search" type="text" aria-label="Search">
+                            </div>
+                        </div>
+                    </form>
                     <!-- Navbar items -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link nav-link-icon" href="<?= site_url('discovery') ?>">
                                 <i class="mdi mdi-globe-model"></i>

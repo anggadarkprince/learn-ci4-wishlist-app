@@ -104,6 +104,7 @@ $routes->group('/', ['filter' => 'auth'], function (RouteCollection $routes) {
 
     $routes->group('/', ['namespace' => 'App\Controllers\Wishlist'], function (RouteCollection $routes) {
         $routes->resource('wishlists');
+        $routes->get('discovery', 'Discovery::index');
     });
 
     $routes->group('/', ['namespace' => 'App\Controllers\Utility'], function (RouteCollection $routes) {

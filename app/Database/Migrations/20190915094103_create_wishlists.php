@@ -18,6 +18,7 @@ class Migration_create_wishlists_table extends Migration
 			'is_private' => ['type' => 'BOOLEAN', 'default' => false],
 			'is_completed' => ['type' => 'BOOLEAN', 'default' => false],
 			'completed_at' => ['type' => 'DATE', 'null' => true],
+            'total_support' => ['type' => 'INT', 'constraint' => 11, 'default' => 0],
 		]);
 		$this->forge->addField("`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
 		$this->forge->addField("`updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP");
