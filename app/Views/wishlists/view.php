@@ -79,6 +79,25 @@
     </div>
 
     <div class="card grid-margin">
+        <div class="card-body">
+            <h4 class="card-title">Wishlist Detail</h4>
+            <ul class="timeline pl-0">
+                <?php foreach ($wishlistDetails as $wishlistDetail): ?>
+                    <li class="d-sm-flex justify-content-between">
+                        <p>
+                            <?= nl2br(if_empty($wishlistDetail->detail, '-')) ?>
+                        </p>
+                        <small><?= relative_time($wishlistDetail->created_at)?></small>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <?php if(empty($wishlistDetails)): ?>
+                <p class="text-muted mt-3">No detail activity available</p>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="card grid-margin">
         <div class="card-body d-flex justify-content-between">
             <button onclick="history.back()" type="button" class="btn btn-light">Back</button>
             <a href="<?= site_url('wishlists/' . $wishlist->id . '/edit') ?>" class="btn btn-primary">

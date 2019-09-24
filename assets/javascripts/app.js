@@ -48,6 +48,10 @@ try {
         import("./pages/role").then(role => role.default());
     }
 
+    if ($('#form-wishlist').length) {
+        import("./pages/wishlist").then(wishlist => wishlist.default());
+    }
+
     if ($('#dashboard').length) {
         import("./pages/dashboard").then(dashboard => dashboard.default());
     }

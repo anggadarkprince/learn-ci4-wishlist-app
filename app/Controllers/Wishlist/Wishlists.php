@@ -4,6 +4,7 @@ namespace App\Controllers\Wishlist;
 
 use App\Controllers\BaseController;
 use App\Libraries\Exporter;
+use App\Models\WishlistDetailModel;
 use App\Models\WishlistModel;
 use CodeIgniter\HTTP\RedirectResponse;
 use ReflectionException;
@@ -50,7 +51,10 @@ class Wishlists extends BaseController
         $title = 'View wishlist';
         $wishlist = $this->wishlist->find($id);
 
-        return view('wishlists/view', compact('wishlist', 'title'));
+        $wishlistDetail = new WishlistDetailModel();
+        $wishlistDetails = $wishlistDetail->where(['wishlist_id' => $id])->findAll();
+
+        return view('wishlists/view', compact('wishlist', 'wishlistDetails', 'title'));
     }
 
     /**
@@ -83,7 +87,15 @@ class Wishlists extends BaseController
 
             $this->db->transStart();
 
-            $this->wishlist->insert($wishData);
+            $wishlistId = $this->wishlist->insert($wishData);
+
+            $wishlistDetail = new WishlistDetailModel();
+            foreach ($this->request->getPost('details') as $detail) {
+                $wishlistDetail->insert([
+                    'wishlist_id' => $wishlistId,
+                    'detail' => $detail['detail']
+                ]);
+            }
 
             $this->db->transComplete();
 
@@ -110,7 +122,10 @@ class Wishlists extends BaseController
         $title = 'Edit wishlist';
         $wishlist = $this->wishlist->find($id);
 
-        return view('wishlists/edit', compact('wishlist', 'title'));
+        $wishlistDetail = new WishlistDetailModel();
+        $wishlistDetails = $wishlistDetail->where(['wishlist_id' => $id])->findAll();
+
+        return view('wishlists/edit', compact('wishlist', 'wishlistDetails', 'title'));
     }
 
     /**
@@ -131,6 +146,15 @@ class Wishlists extends BaseController
             $this->db->transStart();
 
             $this->wishlist->update($id, $wishData);
+
+            $wishlistDetail = new WishlistDetailModel();
+            $wishlistDetail->where('wishlist_id', $id)->delete();
+            foreach ($this->request->getPost('details') as $detail) {
+                $wishlistDetail->insert([
+                    'wishlist_id' => $id,
+                    'detail' => $detail['detail']
+                ]);
+            }
 
             $this->db->transComplete();
 
