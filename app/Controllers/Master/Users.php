@@ -5,7 +5,6 @@ namespace App\Controllers\Master;
 use App\Controllers\BaseController;
 use App\Libraries\Exporter;
 use App\Libraries\File;
-use App\Models\PermissionModel;
 use App\Models\RoleModel;
 use App\Models\UserRoleModel;
 use App\Models\UserModel;
@@ -96,7 +95,12 @@ class Users extends BaseController
                 $fileHandler->makeFolder('uploads/' . $fileDirectory);
 
                 $filePath = WRITEPATH . 'uploads/' . $fileDirectory;
-                $file->move($filePath, $fileName);
+
+                if (!$file->move($filePath, $fileName)) {
+                    return redirect()->back()->withInput()
+                        ->with('status', 'warning')
+                        ->with('message', $file->getErrorString());
+                }
 
                 $data['avatar'] = $fileDirectory . $fileName;
             }
@@ -188,6 +192,16 @@ class Users extends BaseController
 
                 $filePath = WRITEPATH . 'uploads/' . $fileDirectory;
                 $file->move($filePath, $fileName);
+
+                if ($file->move($filePath, $fileName)) {
+                    if (!empty($user->avatar)) {
+                        $fileHandler->delete('uploads/' . $user->avatar);
+                    }
+                } else {
+                    return redirect()->back()->withInput()
+                        ->with('status', 'warning')
+                        ->with('message', $file->getErrorString());
+                }
 
                 $data['avatar'] = $fileDirectory . $fileName;
             } else {

@@ -60,57 +60,72 @@
                         <i class="mdi mdi-monitor-dashboard text-yellow"></i> Dashboard
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="<?= site_url('master/roles') ?>">
-                        <i class="mdi mdi-shield-account text-teal"></i> Roles
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="<?= site_url('master/users') ?>">
-                        <i class="mdi mdi-account-multiple text-success"></i> Users
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="<?= site_url('wishlists') ?>">
-                        <i class="mdi mdi-gift text-blue"></i> Wish lists
-                    </a>
-                </li>
+                <?php if(is_authorized(PERMISSION_ROLE_VIEW)): ?>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?= site_url('master/roles') ?>">
+                            <i class="mdi mdi-shield-account text-teal"></i> Roles
+                        </a>
+                    </li>
+                <?php endif; ?>
+                <?php if(is_authorized(PERMISSION_USER_VIEW)): ?>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?= site_url('master/users') ?>">
+                            <i class="mdi mdi-account-multiple text-success"></i> Users
+                        </a>
+                    </li>
+                <?php endif; ?>
+                <?php if(is_authorized(PERMISSION_WISHLIST_VIEW)): ?>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?= site_url('wishlists') ?>">
+                            <i class="mdi mdi-gift text-blue"></i> Wish lists
+                        </a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link " href="<?= site_url('logout') ?>">
                         <i class="mdi mdi-exit-to-app text-orange"></i> Sign out
                     </a>
                 </li>
             </ul>
-            <!-- Heading -->
-            <h6 class="navbar-heading text-muted">Personalize</h6>
-            <!-- Navigation -->
-            <ul class="navbar-nav mb-md-3">
-                <li class="nav-item">
-                    <a class="nav-link " href="<?= site_url('account') ?>">
-                        <i class="mdi mdi-account-outline"></i> My Account
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('setting') ?>">
-                        <i class="mdi mdi-settings-outline"></i> Setting
-                    </a>
-                </li>
-            </ul>
-            <!-- Heading -->
-            <h6 class="navbar-heading text-muted">Preference</h6>
-            <!-- Navigation -->
-            <ul class="navbar-nav mb-md-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('backup') ?>">
-                        <i class="mdi mdi-backup-restore"></i> Backup
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('logs') ?>">
-                        <i class="mdi mdi-note-outline"></i> Logs
-                    </a>
-                </li>
-            </ul>
+            <?php if(is_authorized(PERMISSION_ACCOUNT_EDIT)
+                || is_authorized(PERMISSION_SETTING_EDIT)): ?>
+                <!-- Heading -->
+                <h6 class="navbar-heading text-muted">Personalize</h6>
+                <!-- Navigation -->
+                <ul class="navbar-nav mb-md-3">
+                    <?php if(is_authorized(PERMISSION_ACCOUNT_EDIT)): ?>
+                        <li class="nav-item">
+                            <a class="nav-link " href="<?= site_url('account') ?>">
+                                <i class="mdi mdi-account-outline"></i> My Account
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if(is_authorized(PERMISSION_SETTING_EDIT)): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= site_url('setting') ?>">
+                                <i class="mdi mdi-settings-outline"></i> Setting
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            <?php endif; ?>
+            <?php if(is_authorized(PERMISSION_UTILITY_EDIT)): ?>
+                <!-- Heading -->
+                <h6 class="navbar-heading text-muted">Preference</h6>
+                <!-- Navigation -->
+                <ul class="navbar-nav mb-md-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= site_url('backup') ?>">
+                            <i class="mdi mdi-backup-restore"></i> Backup
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= site_url('logs') ?>">
+                            <i class="mdi mdi-note-outline"></i> Logs
+                        </a>
+                    </li>
+                </ul>
+            <?php endif; ?>
         </div>
     </div>
 </nav>

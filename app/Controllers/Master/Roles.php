@@ -67,7 +67,7 @@ class Roles extends BaseController
     {
         $title = 'New role';
         $permission = new PermissionModel();
-        $permissions = $permission->findAll();
+        $permissions = $permission->orderBy('module')->findAll();
 
         return view('roles/new', compact('permissions', 'title'));
     }
@@ -126,7 +126,7 @@ class Roles extends BaseController
         }
 
         $permission = new PermissionModel();
-        $permissions = $permission->findAll();
+        $permissions = $permission->orderBy('module')->findAll();
 
         $rolePermission = new RolePermissionModel();
         $rolePermissions = $rolePermission->where(['role_id' => $id])->findAll();

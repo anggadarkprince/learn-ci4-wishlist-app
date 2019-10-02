@@ -83,6 +83,7 @@ defined('PERMISSION_ALL_ACCESS') or define('PERMISSION_ALL_ACCESS', 'all-access'
 // Account setting permission
 defined('PERMISSION_ACCOUNT_EDIT') or define('PERMISSION_ACCOUNT_EDIT', 'account-edit');
 defined('PERMISSION_SETTING_EDIT') or define('PERMISSION_SETTING_EDIT', 'setting-edit');
+defined('PERMISSION_UTILITY_EDIT') or define('PERMISSION_UTILITY_EDIT', 'utility-edit');
 
 // Master role permission
 defined('PERMISSION_ROLE_VIEW') or define('PERMISSION_ROLE_VIEW', 'role-view');

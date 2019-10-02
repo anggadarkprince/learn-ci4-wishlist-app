@@ -18,14 +18,18 @@
             <i class="mdi mdi-account-outline"></i>
             <span>My profile</span>
         </a>
-        <a href="<?= site_url('setting') ?>" class="dropdown-item">
-            <i class="mdi mdi-settings-outline"></i>
-            <span>Settings</span>
-        </a>
-        <a href="<?= site_url('wishlists') ?>" class="dropdown-item">
-            <i class="mdi mdi-gift-outline"></i>
-            <span>Wishlist</span>
-        </a>
+        <?php if(is_authorized(PERMISSION_SETTING_EDIT)): ?>
+            <a href="<?= site_url('setting') ?>" class="dropdown-item">
+                <i class="mdi mdi-settings-outline"></i>
+                <span>Settings</span>
+            </a>
+        <?php endif; ?>
+        <?php if(is_authorized(PERMISSION_WISHLIST_VIEW)): ?>
+            <a href="<?= site_url('wishlists') ?>" class="dropdown-item">
+                <i class="mdi mdi-gift-outline"></i>
+                <span>Wishlist</span>
+            </a>
+        <?php endif; ?>
         <a href="<?= site_url('help') ?>" class="dropdown-item">
             <i class="mdi mdi-help-circle-outline"></i>
             <span>Support</span>

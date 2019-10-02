@@ -4,37 +4,50 @@ use CodeIgniter\Config\BaseConfig;
 
 class Filters extends BaseConfig
 {
-	// Makes reading things below nicer,
-	// and simpler to change out script that's used.
-	public $aliases = [
-		'csrf'     => \CodeIgniter\Filters\CSRF::class,
-		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
-		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
-		'auth' => \App\Filters\MustAuthenticated::class,
-		'guest' => \App\Filters\RedirectIfAuthenticated::class,
-		'logger' => \App\Filters\Logger::class,
-	];
+    // Makes reading things below nicer,
+    // and simpler to change out script that's used.
+    public $aliases = [
+        'csrf' => \CodeIgniter\Filters\CSRF::class,
+        'toolbar' => \CodeIgniter\Filters\DebugToolbar::class,
+        'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+        'auth' => \App\Filters\MustAuthenticated::class,
+        'authorized' => \App\Filters\MustAuthorized::class,
+        'guest' => \App\Filters\RedirectIfAuthenticated::class,
+        'logger' => \App\Filters\Logger::class,
+    ];
 
-	// Always applied before every request
-	public $globals = [
-		'before' => [
-			//'honeypot'
-			'csrf',
-		],
-		'after'  => [
-			'logger',
-			'toolbar',
-			//'honeypot'
-		],
-	];
+    // Always applied before every request
+    public $globals = [
+        'before' => [
+            //'honeypot'
+            'csrf',
+        ],
+        'after' => [
+            'logger',
+            'toolbar',
+            //'honeypot'
+        ],
+    ];
 
-	// Works on all of a particular HTTP method
-	// (GET, POST, etc) as BEFORE filters only
-	//     like: 'post' => ['CSRF', 'throttle'],
-	public $methods = [];
+    // Works on all of a particular HTTP method
+    // (GET, POST, etc) as BEFORE filters only
+    //     like: 'post' => ['CSRF', 'throttle'],
+    public $methods = [];
 
-	// List filter aliases and any before/after uri patterns
-	// that they should run on, like:
-	//    'isLoggedIn' => ['before' => ['account/*', 'profiles/*']],
-	public $filters = [];
+    // List filter aliases and any before/after uri patterns
+    // that they should run on, like:
+    //    'isLoggedIn' => ['before' => ['account/*', 'profiles/*']],
+    public $filters = [
+        'authorized' => [
+            'before' => [
+                'master/roles*',
+                'master/users*',
+                'wishlists*',
+                'account*',
+                'setting*',
+                'backup*',
+                'logs*'
+            ]
+        ],
+    ];
 }

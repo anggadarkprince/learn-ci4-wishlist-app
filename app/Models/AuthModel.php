@@ -132,4 +132,71 @@ class AuthModel extends BaseModel
         }
         return $result;
     }
+
+    /**
+     * Quick check user permission.
+     *
+     * @param $permission
+     * @param null $redirect
+     * @return string|void
+     */
+    public static function mustAuthorized($permission, $redirect = null)
+    {
+        if (!self::isAuthorized($permission)) {
+            $request = Services::request();
+            $response = Services::response();
+            $session = Services::session();
+            $agent = $request->getUserAgent();
+
+            $message = 'You are unauthorized to perform this action.';
+
+            if ($request->isAJAX()) {
+                return $message;
+            } else {
+                $session->setFlashdata([
+                    'status' => 'danger',
+                    'message' => $message,
+                ]);
+            }
+
+            $redirectModule = if_empty($redirect, '/', '/');
+
+            $response->setHeader('Location', if_empty($agent->getReferrer(), $redirectModule))->send();
+        }
+    }
+
+    /**
+     * Check authorization by granted or denied point of view.
+     *
+     * @param $permissions
+     * @param $userId
+     * @return bool
+     */
+    public static function isAuthorized($permissions, $userId = null)
+    {
+        if (empty($userId)) $userId = self::loginData('id', 0);
+
+        if (!is_array($permissions) && is_string($permissions)) $permissions = [$permissions];
+
+        $permissionQuery = Database::connect()->table('users')
+            ->select(['permissions.id', 'permissions.permission'])
+            ->join('user_roles', 'users.id = user_roles.user_id')
+            ->join('roles', 'user_roles.role_id = roles.id')
+            ->join('role_permissions', 'roles.id = role_permissions.role_id')
+            ->join('permissions', 'role_permissions.permission_id = permissions.id')
+            ->where('users.id', $userId)
+            ->groupStart()
+            ->whereIn('permissions.permission', $permissions)
+            ->orWhere('permissions.permission', PERMISSION_ALL_ACCESS)
+            ->orWhere('users.username', 'admin')
+            ->groupEnd()
+            ->get()
+            ->getRow();
+
+        if (!empty($permissionQuery)) {
+            return true;
+        }
+
+        return false;
+    }
 }

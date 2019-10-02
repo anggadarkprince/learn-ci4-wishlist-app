@@ -24,6 +24,11 @@ class PermissionSeeder extends Seeder
                 'submodule' => 'setting',
                 'description' => 'Update application setting'
             ],
+            PERMISSION_UTILITY_EDIT => [
+                'module' => 'setting',
+                'submodule' => 'utility',
+                'description' => 'Access system tools'
+            ],
 
             PERMISSION_ROLE_VIEW => [
                 'module' => 'master',

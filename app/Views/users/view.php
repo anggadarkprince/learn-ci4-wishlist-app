@@ -109,9 +109,11 @@
         <div class="card grid-margin">
             <div class="card-body d-flex justify-content-between">
                 <button onclick="history.back()" type="button" class="btn btn-light">Back</button>
-                <a href="<?= site_url('master/users/' . $user->id . '/edit') ?>" class="btn btn-primary">
-                    Edit User
-                </a>
+                <?php if(is_authorized(PERMISSION_USER_VIEW)): ?>
+                    <a href="<?= site_url('master/users/' . $user->id . '/edit') ?>" class="btn btn-primary">
+                        Edit User
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
     </form>

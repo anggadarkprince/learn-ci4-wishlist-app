@@ -97,17 +97,17 @@ $routes->group('/', ['namespace' => 'App\Controllers\Auth', 'filter' => 'guest']
 });
 
 $routes->group('/', ['filter' => 'auth'], function (RouteCollection $routes) {
-    $routes->group('master', ['namespace' => 'App\Controllers\Master'], function (RouteCollection $routes) {
+    $routes->group('master', ['namespace' => 'App\Controllers\Master', 'filter' => 'auth'], function (RouteCollection $routes) {
         $routes->resource('users');
         $routes->resource('roles');
     });
 
-    $routes->group('/', ['namespace' => 'App\Controllers\Wishlist'], function (RouteCollection $routes) {
+    $routes->group('/', ['namespace' => 'App\Controllers\Wishlist', 'filter' => 'auth'], function (RouteCollection $routes) {
         $routes->resource('wishlists');
         $routes->get('discovery', 'Discovery::index');
     });
 
-    $routes->group('/', ['namespace' => 'App\Controllers\Utility'], function (RouteCollection $routes) {
+    $routes->group('/', ['namespace' => 'App\Controllers\Utility', 'filter' => 'auth'], function (RouteCollection $routes) {
         $routes->get('backup', 'Backup::index');
         $routes->get('backup/(:alpha)', 'Backup::$1');
 
@@ -116,13 +116,13 @@ $routes->group('/', ['filter' => 'auth'], function (RouteCollection $routes) {
         $routes->get('logs/view/(:num)', 'Logs::view/$1');
     });
 
-    $routes->get('account', 'Account::index');
-    $routes->post('account', 'Account::update');
+    $routes->get('account', 'Account::index', ['filter' => 'auth']);
+    $routes->post('account', 'Account::update', ['filter' => 'auth']);
 
-    $routes->get('setting', 'Setting::index');
-    $routes->put('setting', 'Setting::update');
+    $routes->get('setting', 'Setting::index', ['filter' => 'auth']);
+    $routes->put('setting', 'Setting::update', ['filter' => 'auth']);
 
-    $routes->get('logout', 'App\Controllers\Auth\Authentication::logout');
+    $routes->get('logout', 'App\Controllers\Auth\Authentication::logout', ['filter' => 'auth']);
 });
 
 $routes->get('/(:alpha)', 'Page::index/$1');

@@ -25,6 +25,8 @@ class Wishlists extends BaseController
      */
     public function index()
     {
+        must_authorized(PERMISSION_WISHLIST_VIEW);
+
         $title = 'Wishlist';
         $data = $this->wishlist->filter($_GET);
 
@@ -48,6 +50,8 @@ class Wishlists extends BaseController
      */
     public function show($id)
     {
+        must_authorized(PERMISSION_WISHLIST_VIEW);
+
         $title = 'View wishlist';
         $wishlist = $this->wishlist->find($id);
 
@@ -64,6 +68,8 @@ class Wishlists extends BaseController
      */
     public function new()
     {
+        must_authorized(PERMISSION_WISHLIST_CREATE);
+
         $title = 'New wishlist';
 
         return view('wishlists/new', compact('title'));
@@ -77,6 +83,8 @@ class Wishlists extends BaseController
      */
     public function create()
     {
+        must_authorized(PERMISSION_WISHLIST_CREATE);
+
         if ($this->validate('wishlists')) {
             $wishData = $this->request->getPost();
             $wishData['user_id'] = auth('id');
@@ -119,6 +127,8 @@ class Wishlists extends BaseController
      */
     public function edit($id)
     {
+        must_authorized(PERMISSION_WISHLIST_EDIT);
+
         $title = 'Edit wishlist';
         $wishlist = $this->wishlist->find($id);
 
@@ -137,6 +147,8 @@ class Wishlists extends BaseController
      */
     public function update($id)
     {
+        must_authorized(PERMISSION_WISHLIST_EDIT);
+
         if ($this->validate('wishlists')) {
             $wishData = $this->request->getPost();
             if ($this->request->getPost('is_completed')) {
@@ -178,6 +190,8 @@ class Wishlists extends BaseController
      */
     public function delete($id)
     {
+        must_authorized(PERMISSION_WISHLIST_DELETE);
+
         $wishlist = $this->wishlist->find($id);
 
         if ($this->wishlist->delete($id)) {

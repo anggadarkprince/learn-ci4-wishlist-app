@@ -97,9 +97,11 @@
         <div class="card grid-margin">
             <div class="card-body d-flex justify-content-between">
                 <button onclick="history.back()" type="button" class="btn btn-light">Back</button>
-                <a href="<?= site_url('master/roles/' . $role->id . '/edit') ?>" class="btn btn-primary">
-                    Edit Role
-                </a>
+                <?php if(is_authorized(PERMISSION_ROLE_EDIT)): ?>
+                    <a href="<?= site_url('master/roles/' . $role->id . '/edit') ?>" class="btn btn-primary">
+                        Edit Role
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
     </form>

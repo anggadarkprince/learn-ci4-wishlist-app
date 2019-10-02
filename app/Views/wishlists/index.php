@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-body">
         <div class="d-sm-flex align-items-center justify-content-between">
-            <h4 class="card-title mb-sm-0">Data Users</h4>
+            <h4 class="card-title mb-sm-0">Data Wishlist</h4>
             <div>
                 <a href="#modal-filter" data-toggle="modal" class="btn btn-outline-primary px-2">
                     <i class="mdi mdi-filter-variant"></i>
@@ -12,9 +12,11 @@
                 <a href="<?= base_url(uri_string()) ?>?<?= $_SERVER['QUERY_STRING'] ?>&export=true" class="btn btn-outline-primary px-2">
                     <i class="mdi mdi-file-download-outline"></i>
                 </a>
-                <a href="<?= site_url('wishlists/new') ?>" class="btn btn-success">
-                    <i class="mdi mdi-plus-box-outline mr-1"></i>CREATE
-                </a>
+                <?php if(is_authorized(PERMISSION_WISHLIST_CREATE)): ?>
+                    <a href="<?= site_url('wishlists/new') ?>" class="btn btn-success">
+                        <i class="mdi mdi-plus-box-outline mr-1"></i>CREATE
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
         <table class="table table-hover table-md mt-3 responsive">
@@ -41,16 +43,22 @@
                                     Action
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="<?= site_url('wishlists/' . $wishlist->id) ?>">
-                                        <i class="mdi mdi-eye-outline mr-2"></i> View
-                                    </a>
-                                    <a class="dropdown-item" href="<?= site_url('wishlists/' . $wishlist->id . '/edit') ?>">
-                                        <i class="mdi mdi-square-edit-outline mr-2"></i> Edit
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item btn-delete" href="#modal-delete" data-toggle="modal" data-id="<?= $wishlist->id ?>" data-label="<?= $wishlist->role ?>" data-title="Role" data-url="<?= site_url('wishlists/' . $wishlist->id) ?>">
-                                        <i class="mdi mdi-trash-can-outline mr-2"></i> Delete
-                                    </a>
+                                    <?php if(is_authorized(PERMISSION_WISHLIST_VIEW)): ?>
+                                        <a class="dropdown-item" href="<?= site_url('wishlists/' . $wishlist->id) ?>">
+                                            <i class="mdi mdi-eye-outline mr-2"></i> View
+                                        </a>
+                                    <?php endif; ?>
+                                    <?php if(is_authorized(PERMISSION_WISHLIST_EDIT)): ?>
+                                        <a class="dropdown-item" href="<?= site_url('wishlists/' . $wishlist->id . '/edit') ?>">
+                                            <i class="mdi mdi-square-edit-outline mr-2"></i> Edit
+                                        </a>
+                                    <?php endif; ?>
+                                    <?php if(is_authorized(PERMISSION_WISHLIST_DELETE)): ?>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item btn-delete" href="#modal-delete" data-toggle="modal" data-id="<?= $wishlist->id ?>" data-label="<?= $wishlist->role ?>" data-title="Role" data-url="<?= site_url('wishlists/' . $wishlist->id) ?>">
+                                            <i class="mdi mdi-trash-can-outline mr-2"></i> Delete
+                                        </a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </td>
