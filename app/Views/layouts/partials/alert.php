@@ -6,3 +6,9 @@
         <?= service('session')->getFlashdata('message') ?>
     </div>
 <?php endif; ?>
+
+<?php if (service('session')->getFlashdata('error') != NULL): ?>
+    <div class="alert alert-danger" role="alert">
+        <?= service('session')->getFlashdata('error') ?>
+    </div>
+<?php endif; ?>

@@ -9,6 +9,8 @@ use App\Models\RoleModel;
 use App\Models\UserRoleModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\Images\Exceptions\ImageException;
+use Config\Services;
 use ReflectionException;
 
 class Users extends BaseController
@@ -100,6 +102,17 @@ class Users extends BaseController
                     return redirect()->back()->withInput()
                         ->with('status', 'warning')
                         ->with('message', $file->getErrorString());
+                }
+
+                try {
+                    Services::image()
+                        ->withFile($filePath . $fileName)
+                        ->fit(100, 100, 'center')
+                        ->save($filePath . 'thumb_' . $fileName, 75);
+                } catch (ImageException $e) {
+                    return redirect()->back()->withInput()
+                        ->with('status', 'warning')
+                        ->with('message', $e->getMessage());
                 }
 
                 $data['avatar'] = $fileDirectory . $fileName;
@@ -201,6 +214,17 @@ class Users extends BaseController
                     return redirect()->back()->withInput()
                         ->with('status', 'warning')
                         ->with('message', $file->getErrorString());
+                }
+
+                try {
+                    Services::image()
+                        ->withFile($filePath . $fileName)
+                        ->fit(100, 100, 'center')
+                        ->save($filePath . 'thumb_' . $fileName, 75);
+                } catch (ImageException $e) {
+                    return redirect()->back()->withInput()
+                        ->with('status', 'warning')
+                        ->with('message', $e->getMessage());
                 }
 
                 $data['avatar'] = $fileDirectory . $fileName;

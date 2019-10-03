@@ -1,25 +1,34 @@
 <?php namespace Config;
 
+use App\Filters\MustAuthenticated;
+use App\Filters\MustAuthorized;
+use App\Filters\RedirectIfAuthenticated;
+use App\Filters\Logger;
+use App\Filters\Throttle;
 use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\Filters\CSRF;
+use CodeIgniter\Filters\DebugToolbar;
+use CodeIgniter\Filters\Honeypot;
 
 class Filters extends BaseConfig
 {
     // Makes reading things below nicer,
     // and simpler to change out script that's used.
     public $aliases = [
-        'csrf' => \CodeIgniter\Filters\CSRF::class,
-        'toolbar' => \CodeIgniter\Filters\DebugToolbar::class,
-        'honeypot' => \CodeIgniter\Filters\Honeypot::class,
-        'auth' => \App\Filters\MustAuthenticated::class,
-        'authorized' => \App\Filters\MustAuthorized::class,
-        'guest' => \App\Filters\RedirectIfAuthenticated::class,
-        'logger' => \App\Filters\Logger::class,
+        'csrf' => CSRF::class,
+        'toolbar' => DebugToolbar::class,
+        'honeypot' => Honeypot::class,
+        'auth' => MustAuthenticated::class,
+        'authorized' => MustAuthorized::class,
+        'guest' => RedirectIfAuthenticated::class,
+        'logger' => Logger::class,
+        'throttle' => Throttle::class
     ];
 
     // Always applied before every request
     public $globals = [
         'before' => [
-            //'honeypot'
+            'honeypot',
             'csrf',
         ],
         'after' => [
@@ -32,7 +41,9 @@ class Filters extends BaseConfig
     // Works on all of a particular HTTP method
     // (GET, POST, etc) as BEFORE filters only
     //     like: 'post' => ['CSRF', 'throttle'],
-    public $methods = [];
+    public $methods = [
+        'post' => ['throttle']
+    ];
 
     // List filter aliases and any before/after uri patterns
     // that they should run on, like:
