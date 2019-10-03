@@ -27,7 +27,7 @@
                     <tr>
                         <td class="text-md-center"><?= $no++ ?></td>
                         <td><?= $log['log_file'] ?></td>
-                        <td><?= numerical($log['file_size']) ?> KB</td>
+                        <td><?= $log['file_size'] ?></td>
                         <td><?= format_date($log['last_modified'], 'd F Y H:i:s') ?></td>
                         <td class="text-md-right">
                             <a href="<?= site_url('logs/system?download=' . $log['log_file']) ?>">

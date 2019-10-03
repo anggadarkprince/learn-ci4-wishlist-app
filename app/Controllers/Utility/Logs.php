@@ -22,6 +22,7 @@ class Logs extends BaseController
     public function system()
     {
         helper('filesystem');
+        helper('number');
 
         $logPath = WRITEPATH . 'logs/';
 
@@ -38,7 +39,7 @@ class Logs extends BaseController
             }
             $file = [
                 'log_file' => $file,
-                'file_size' => round(filesize($logPath . $file) / 1000, 1),
+                'file_size' => number_to_size(filesize($logPath . $file)),
                 'last_modified' => date("Y-m-d H:i:s", filemtime($logPath . $file)),
             ];
         }
