@@ -40,6 +40,22 @@ class WishlistModel extends BaseModel
                     $this->orLike($this->table . '.' . $field->name, trim($filters['q']));
                 }
             }
+            $this->orLike('users.name', trim($filters['q']));
+            $this->orLike('users.username', trim($filters['q']));
+            $this->orLike('users.email', trim($filters['q']));
+        }
+
+        if (key_exists('is_completed', $filters) && !is_null($filters['is_completed']) && $filters['is_completed'] != '') {
+            $this->where('wishlists.is_completed', $filters['is_completed']);
+        }
+
+        if (key_exists('shared', $filters) && $filters['shared']) {
+            $this->join('wishlist_participants', 'wishlist_participants.wishlist_id = wishlists.id');
+            $this->where('wishlist_participants.user_id', $filters['users']);
+        } else {
+            if (key_exists('users', $filters) && !empty($filters['users'])) {
+                $this->where('users.id', $filters['users']);
+            }
         }
 
         if (key_exists('public', $filters) && $filters['public']) {

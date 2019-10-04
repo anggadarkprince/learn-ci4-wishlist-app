@@ -125,7 +125,20 @@ $routes->group('/', ['filter' => 'auth'], function (RouteCollection $routes) {
     $routes->get('logout', 'App\Controllers\Auth\Authentication::logout', ['filter' => 'auth']);
 });
 
-$routes->get('/(:alpha)', 'Page::index/$1');
+$routes->get('/visit', function () {
+    $request = Services::request();
+    $url = $request->getGet('url');
+    return redirect()->to($url, 301, 'refresh');
+});
+$routes->get('/about', 'Page::index/about');
+$routes->get('/help', 'Page::index/help');
+
+$routes->group('/', ['namespace' => 'App\Controllers\Profile'], function(RouteCollection $routes) {
+    $routes->addPlaceholder('username', '[a-zA-Z0-9_\-]+');
+    $routes->get('/(:username)', 'User::index/$1');
+    $routes->get('/(:username)/shared', 'User::shared/$1');
+    $routes->get('/(:username)/completed', 'User::completed/$1');
+});
 
 //$routes->add('migrate', 'App\Controllers\Console\Migrate::index');
 //$routes->add('migrate/(.+)', 'App\Controllers\Console\Migrate::$1');

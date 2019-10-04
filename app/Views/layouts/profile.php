@@ -16,8 +16,8 @@
 <body class="bg-default">
     <div class="main-content">
         <!-- Navbar -->
-        <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
-            <div class="container px-4">
+        <nav class="navbar navbar-horizontal navbar-expand-md navbar-dark">
+            <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="<?= site_url('/') ?>">
                     <img src="<?= base_url('assets/img/layouts/icon.png') ?>" alt="logo" style="max-width: 50px; -webkit-filter: brightness(0) invert(1)" class="d-inline-block mr-2">
                     <h1 class="d-inline-block mb-0 text-white font-weight-300 text-lowercase">Wishlist</h1>
@@ -42,43 +42,53 @@
                             </div>
                         </div>
                     </div>
+                    <form action="<?= site_url('discovery') ?>" class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+                        <div class="form-group mb-0">
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="mdi mdi-magnify"></i></span>
+                                </div>
+                                <input class="form-control" name="q" value="<?= get_url_param('q') ?>" placeholder="Search" type="text" aria-label="Search">
+                            </div>
+                        </div>
+                    </form>
                     <!-- Navbar items -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link nav-link-icon" href="<?= site_url('discovery') ?>">
                                 <i class="mdi mdi-globe-model"></i>
                                 <span class="nav-link-inner--text">Discovery</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-icon" href="<?= site_url('register') ?>">
-                                <i class="mdi mdi-account-plus-outline"></i>
-                                <span class="nav-link-inner--text">Register</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-icon" href="<?= site_url('login') ?>">
-                                <i class="mdi mdi-login-variant"></i>
-                                <span class="nav-link-inner--text">Login</span>
-                            </a>
-                        </li>
+                        <?php if(auth('id')): ?>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-icon" href="<?= site_url('wishlists') ?>">
+                                    <i class="mdi mdi-gift-outline"></i>
+                                    <span class="nav-link-inner--text">My Wishlist</span>
+                                </a>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-icon" href="<?= site_url('register') ?>">
+                                    <i class="mdi mdi-account-plus-outline"></i>
+                                    <span class="nav-link-inner--text">Register</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-icon" href="<?= site_url('login') ?>">
+                                    <i class="mdi mdi-login-variant"></i>
+                                    <span class="nav-link-inner--text">Login</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!-- Header -->
-        <div class="header bg-gradient-primary py-7">
-            <?= $this->renderSection('header') ?>
-        </div>
-
         <!-- Page content -->
-        <div class="container mt--8 pb-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-5 col-md-7">
-                    <?= $this->include('layouts/partials/alert') ?>
-                </div>
-            </div>
+        <div class="container pt-3 pb-5">
+            <?= $this->include('layouts/partials/alert') ?>
             <?= $this->renderSection('content') ?>
         </div>
 

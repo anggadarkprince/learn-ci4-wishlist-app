@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="<?= csrf_hash() ?>">
     <meta name="base-url" content="<?= site_url() ?>">
     <meta name="user-id" content="">
-    <title>Wishlist</title>
+    <title>Wishlist - <?= isset($title) ? $title : (new \ReflectionClass($this))->getShortName() ?></title>
 
     <link rel="shortcut icon" type="image/png" href="<?= base_url('assets/img/layouts/icon.png') ?>"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">

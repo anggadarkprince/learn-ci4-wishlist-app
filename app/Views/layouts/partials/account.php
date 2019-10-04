@@ -14,7 +14,7 @@
             <h6 class="text-overflow m-0">Welcome</h6>
         </div>
 
-        <a href="<?= site_url('account') ?>" class="dropdown-item">
+        <a href="<?= site_url('/' . auth('username')) ?>" class="dropdown-item">
             <i class="mdi mdi-account-outline"></i>
             <span>My profile</span>
         </a>

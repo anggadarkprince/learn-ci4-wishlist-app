@@ -223,3 +223,17 @@ if (!function_exists('extract_number')) {
         return $value;
     }
 }
+
+
+if (!function_exists('text_to_link')) {
+    /**
+     * Convert text to link when detect url.
+     * @param $text
+     * @return string|string[]|null
+     */
+    function text_to_link($text)
+    {
+        return preg_replace('/(https?:\/\/[\w\-\.!~#?&=+\*\'"(),\/]+|[\w\-\.!~#?&=+\*\'"(),\/]+.com)/', '<a href="/visit?url=$0">$0</a>', $text);
+    }
+}
+
