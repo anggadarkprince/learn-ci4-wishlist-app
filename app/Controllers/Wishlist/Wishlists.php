@@ -3,10 +3,13 @@
 namespace App\Controllers\Wishlist;
 
 use App\Controllers\BaseController;
+use App\Entities\Wishlist;
 use App\Libraries\Exporter;
 use App\Models\WishlistDetailModel;
 use App\Models\WishlistModel;
+use App\Models\WishlistSupportModel;
 use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\Response;
 use ReflectionException;
 
 class Wishlists extends BaseController
@@ -203,5 +206,54 @@ class Wishlists extends BaseController
         return redirect()->back()
             ->with('status', 'danger')
             ->with('message', "Delete wishlist {$wishlist->wish} failed");
+    }
+
+    /**
+     * Support wishlist data.
+     *
+     * @param $id
+     * @return Response
+     * @throws ReflectionException
+     */
+    public function support($id)
+    {
+        must_authorized(PERMISSION_WISHLIST_CREATE);
+
+        $wishlist = $this->wishlist->find($id);
+
+        $support = $this->request->getPost('support');
+
+        $this->db->transStart();
+
+        $this->wishlist->update($id, ['total_support' => $wishlist->total_support + $support]);
+
+        $wishlistSupport = new WishlistSupportModel();
+        if ($support > 0) {
+            $wishlistSupport->insert([
+                'wishlist_id' => $id,
+                'user_id' => auth('id')
+            ]);
+        } else {
+            $wishlistSupport->where([
+                'wishlist_id' => $id,
+                'user_id' => auth('id')
+            ])->delete();
+        }
+
+        $this->db->transComplete();
+
+        if ($this->db->transStatus()) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'support' => $support,
+                'total' => $wishlist->total_support + $support,
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'error',
+            'support' => $support,
+            'message' => 'Something went wrong when support the wishlist',
+        ]);
     }
 }

@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url(get_asset('vendors.css')) ?>">
     <link rel="stylesheet" href="<?= base_url(get_asset('app.css')) ?>">
+    <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 </head>
 <body class="bg-default">
     <div class="main-content">

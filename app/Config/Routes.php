@@ -103,6 +103,7 @@ $routes->group('/', ['filter' => 'auth'], function (RouteCollection $routes) {
     });
 
     $routes->group('/', ['namespace' => 'App\Controllers\Wishlist'], function (RouteCollection $routes) {
+        $routes->post('wishlists/support/(:num)', 'Wishlists::support/$1', ['filter' => 'auth']);
         $routes->resource('wishlists', ['filter' => 'auth']);
         $routes->get('discovery', 'Discovery::index');
     });

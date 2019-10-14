@@ -7,6 +7,7 @@ use App\Libraries\Exporter;
 use App\Models\WishlistDetailModel;
 use App\Models\WishlistModel;
 use App\Models\WishlistParticipantModel;
+use App\Models\WishlistSupportModel;
 use CodeIgniter\HTTP\RedirectResponse;
 use ReflectionException;
 
@@ -35,8 +36,13 @@ class Discovery extends BaseController
         $wishlists = $data->paginate();
 
         $wishlistParticipant = new WishlistParticipantModel();
+        $wishlistSupport = new WishlistSupportModel();
         foreach ($wishlists as &$wishlist) {
             $wishlist->participants = $wishlistParticipant->filter(['wishlist' => $wishlist->id])->findAll();
+            $wishlist->is_supported = $wishlistSupport->where([
+                'wishlist_id' => $wishlist->id,
+                'user_id' => auth('id', 0),
+            ])->countAllResults();
         }
         $pager = $this->wishlist->pager;
 

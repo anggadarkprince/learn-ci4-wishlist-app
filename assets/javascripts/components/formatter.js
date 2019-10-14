@@ -16,7 +16,7 @@ export default {
     getNumberValue: function (value) {
         return Number(value.replace(/[^\d-]/g, ''));
     },
-    setNumberValue: function (value, prefix) {
+    setNumberValue: function (value, prefix = '') {
         const signed = value.toString().match(/-/);
         let number_string = value.toString().replace(/[^,\d]/g, ''),
             splitDecimal = number_string.split(','),

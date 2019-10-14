@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="<?= csrf_hash() ?>">
     <meta name="base-url" content="<?= site_url() ?>">
-    <meta name="user-id" content="">
+    <meta name="user-id" content="<?= auth('id') ?>">
     <title>Wishlist - <?= isset($title) ? $title : (new \ReflectionClass($this))->getShortName() ?></title>
 
     <link rel="shortcut icon" type="image/png" href="<?= base_url('assets/img/layouts/icon.png') ?>"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url(get_asset('vendors.css')) ?>">
     <link rel="stylesheet" href="<?= base_url(get_asset('app.css')) ?>">
+    <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 </head>
 <body class="bg-default">
     <div class="main-content">

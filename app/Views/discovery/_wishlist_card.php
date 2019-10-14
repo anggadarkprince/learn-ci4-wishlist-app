@@ -1,6 +1,6 @@
 <div class="card-columns">
     <?php foreach ($wishlists as $wishlist): ?>
-        <div class="card">
+        <div class="card wishlist-card">
             <div class="card-body">
                 <h3 class="card-title mb-2">
                     <a href="<?= site_url('wishlists/' . $wishlist->id) ?>"><?= $wishlist->wish ?></a>
@@ -29,9 +29,18 @@
             </div>
             <div class="card-footer py-3">
                 <div class="d-flex justify-content-between align-items-center">
-                    <a href="<?= site_url('wishlists/support/' . $wishlist->id) ?>">
-                        <i class="mdi mdi-thumb-up-outline mr-2"></i>
-                        <small><?= numerical($wishlist->total_support) ?> Supports</small>
+                    <a href="<?= site_url('wishlists/support/' . $wishlist->id) ?>" class="btn-support-wishlist <?= $wishlist->is_supported ? 'state-supported' : '' ?> text-<?= $wishlist->is_supported ? 'success' : 'dark' ?>">
+                        <?php if($wishlist->is_supported): ?>
+                            <i class="mdi mdi-thumb-up mr-2"></i>
+                            <small>
+                                <span class="label-support-total"><?= numerical($wishlist->total_support) ?></span> Supports
+                            </small>
+                        <?php else: ?>
+                            <i class="mdi mdi-thumb-up-outline mr-2"></i>
+                            <small>
+                                <span class="label-support-total"><?= numerical($wishlist->total_support) ?></span> Supports
+                            </small>
+                        <?php endif; ?>
                     </a>
                     <div>
                         <a href="<?= site_url($wishlist->username) ?>" title="Owner: <?= $wishlist->name ?>">

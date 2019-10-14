@@ -56,6 +56,10 @@ try {
         import("./pages/dashboard").then(dashboard => dashboard.default());
     }
 
+    if ($('.btn-support-wishlist').length) {
+        import("./pages/wishlist-support").then(wishlistSupport => wishlistSupport.default());
+    }
+
 } catch (e) {
     console.log(e);
 }

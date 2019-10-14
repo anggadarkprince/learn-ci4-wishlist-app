@@ -6,18 +6,21 @@ use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Models\WishlistModel;
 use App\Models\WishlistParticipantModel;
+use App\Models\WishlistSupportModel;
 
 class User extends BaseController
 {
     private $user;
     private $wishlist;
     private $wishlistParticipant;
+    private $wishlistSupport;
 
     public function __construct()
     {
         $this->user = new UserModel();
         $this->wishlist = new WishlistModel();
         $this->wishlistParticipant = new WishlistParticipantModel();
+        $this->wishlistSupport = new WishlistSupportModel();
     }
 
     /**
@@ -80,6 +83,10 @@ class User extends BaseController
 
         foreach ($wishlists as &$wishlist) {
             $wishlist->participants = $this->wishlistParticipant->filter(['wishlist' => $wishlist->id])->findAll();
+            $wishlist->is_supported = $this->wishlistSupport->where([
+                'wishlist_id' => $wishlist->id,
+                'user_id' => auth('id', 0),
+            ])->countAllResults();
         }
 
         $pager = $this->wishlist->pager;
