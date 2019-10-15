@@ -2,9 +2,27 @@
     <?php foreach ($wishlists as $wishlist): ?>
         <div class="card wishlist-card">
             <div class="card-body">
-                <h3 class="card-title mb-2">
-                    <a href="<?= site_url('wishlists/' . $wishlist->id) ?>"><?= $wishlist->wish ?></a>
-                </h3>
+                <div class="d-flex justify-content-between">
+                    <h3 class="card-title mb-2">
+                        <a href="<?= site_url('wishlists/' . $wishlist->id) ?>"><?= $wishlist->wish ?></a>
+                    </h3>
+                    <?php if($wishlist->user_id == auth('id')): ?>
+                        <div class="dropdown mt-1">
+                            <button class="btn-ellipsis" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="action">
+                                <a class="dropdown-item" href="<?= site_url('wishlists/' . $wishlist->id . '/edit') ?>">
+                                    <i class="mdi mdi-square-edit-outline mr-2"></i> Edit
+                                </a>
+                                <a class="dropdown-item btn-delete" href="#modal-delete" data-toggle="modal" data-id="<?= $wishlist->id ?>" data-label="<?= $wishlist->wish ?>" data-title="Wishlist"  data-url="<?= site_url('wishlists/' . $wishlist->id) ?>">
+                                    <i class="mdi mdi-trash-can-outline mr-2"></i> Delete
+                                </a>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
                 <p class="card-text"><?= $wishlist->description ?></p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
@@ -62,3 +80,5 @@
 <?php if (empty($wishlists)): ?>
     <p class="text-center text-light">No wishlist available</p>
 <?php endif; ?>
+
+<?= $this->include('layouts/modals/delete') ?>

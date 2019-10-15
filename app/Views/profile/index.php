@@ -19,6 +19,11 @@
                     </ul>
                     <p class="font-weight-600 mb-0"><?= $user->email ?></p>
                     <p><?= text_to_link($user->about) ?></p>
+                    <?php if($user->id == auth('id')): ?>
+                        <a href="<?= site_url('wishlists/new') ?>" class="btn btn-primary mx-auto">
+                            Create Wishlist
+                        </a>
+                    <?php endif ?>
                 </div>
             </div>
         </div>

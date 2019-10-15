@@ -31,3 +31,18 @@
 .text-dark {
   color: #32325d !important;
 }
+
+.btn-ellipsis {
+  background: none;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+
+  &:hover {
+    background: rgba(197, 236, 255, 0.13);
+    color: #0c85d0;
+  }
+}

@@ -55,7 +55,7 @@
                                     <?php endif; ?>
                                     <?php if(is_authorized(PERMISSION_WISHLIST_DELETE)): ?>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item btn-delete" href="#modal-delete" data-toggle="modal" data-id="<?= $wishlist->id ?>" data-label="<?= $wishlist->role ?>" data-title="Role" data-url="<?= site_url('wishlists/' . $wishlist->id) ?>">
+                                        <a class="dropdown-item btn-delete" href="#modal-delete" data-toggle="modal" data-id="<?= $wishlist->id ?>" data-label="<?= $wishlist->wish ?>" data-title="Wishlist" data-url="<?= site_url('wishlists/' . $wishlist->id) ?>">
                                             <i class="mdi mdi-trash-can-outline mr-2"></i> Delete
                                         </a>
                                     <?php endif; ?>
