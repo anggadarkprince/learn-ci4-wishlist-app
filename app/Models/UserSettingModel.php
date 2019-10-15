@@ -34,6 +34,7 @@ class UserSettingModel extends BaseModel
                 'user_settings.value'
             ])
             ->join('settings', 'settings.id = user_settings.setting_id', 'right')
+            ->where('user_id', auth('id'))
             ->get()
             ->getResult();
 

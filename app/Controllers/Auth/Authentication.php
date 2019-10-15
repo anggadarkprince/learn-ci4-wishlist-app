@@ -5,6 +5,7 @@ namespace App\Controllers\Auth;
 use App\Controllers\BaseController;
 use App\Models\AuthModel;
 use App\Models\UserModel;
+use App\Models\UserSettingModel;
 use App\Models\UserTokenModel;
 use CodeIgniter\HTTP\RedirectResponse;
 use Config\Services;
@@ -16,6 +17,7 @@ class Authentication extends BaseController
     /**
      * Show default login page.
      * @throws ReflectionException
+     * @throws \Exception
      */
     public function index()
     {
@@ -68,6 +70,25 @@ class Authentication extends BaseController
 
                             // decide where application to go after login
                             $intended = urldecode($this->request->getGet('redirect'));
+
+                            // check if they want get notified
+                            if(UserSettingModel::getSetting(SETTING_NOTIFICATION_LOGIN_DEVICE)) {
+                                $agent = $this->request->getUserAgent();
+                                $loginData = [
+                                    'name' => $authenticated['user']->name,
+                                    'username' => $authenticated['user']->username,
+                                    'email' => $authenticated['user']->email,
+                                    'ip' => $this->request->getIPAddress(),
+                                    'platform' => $agent->getPlatform(),
+                                    'browser' => $agent->getBrowser(),
+                                    'is_mobile' => $agent->isMobile(),
+                                ];
+                                $mailer = Services::email();
+                                $mailer->setTo($authenticated['user']->email);
+                                $mailer->setSubject(config('App')->appName . ' - Login notification');
+                                $mailer->setMessage(view('emails/login', compact('loginData')));
+                                $mailer->send();
+                            }
 
                             // redirect to intended page if no default application is set up
                             if (empty($intended)) {
